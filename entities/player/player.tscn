@@ -852,10 +852,14 @@ script = ExtResource("1_fkugw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=865652003]
 shape = SubResource("CapsuleShape2D_26q78")
 
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1653637445]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1859344504]
 position = Vector2(1, 7)
 sprite_frames = SubResource("SpriteFrames_ix1gt")
-animation = &"walk_right"
+animation = &"walk_down"
 autoplay = "idle_down"
 
 [node name="InteractionArea" type="Area2D" parent="CharacterBody2D/AnimatedSprite2D" unique_id=22124935]

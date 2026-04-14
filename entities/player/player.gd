@@ -1,9 +1,8 @@
 extends CharacterBody2D
 
-const SPEED := 64.0
+const SPEED := 120
 
 @onready var sprite := $AnimatedSprite2D
-@onready var interaction_area := $InteractionArea
 
 var last_direction := Vector2.DOWN
 var interactable : Node = null
@@ -15,6 +14,8 @@ func _physics_process(_delta: float) -> void:
 
 	velocity = direction * SPEED
 	move_and_slide()
+	
+	position.round()
 	_update_animation(direction)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -34,12 +35,3 @@ func _dir_name(dir: Vector2) -> String:
 		return "right" if dir.x > 0 else "left"
 	else:
 		return "down" if dir.y > 0 else "up"
-
-# --- Interaction ---
-func _on_interaction_area_body_entered(body: Node) -> void:
-	if body.has_method("interact"):
-		interactable = body
-
-func _on_interaction_area_body_exited(body: Node) -> void:
-	if body == interactable:
-		interactable = null

@@ -13,6 +13,7 @@ config_version=5
 config/name="Scrap Signal"
 run/main_scene="uid://c5lskgqkorw6v"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [display]
@@ -22,7 +23,6 @@ window/size/viewport_height=180
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
-window/stretch/scale_mode="integer"
 
 [input]
 
@@ -67,6 +67,7 @@ interact={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 
