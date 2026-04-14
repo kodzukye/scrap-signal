@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c5lskgqkorw6v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wsebr"]
+
+[node name="Main" type="Node2D" unique_id=42454470]
+
+[node name="Node2D" type="Node2D" parent="." unique_id=87146710]
+
+[node name="Label" type="Label" parent="Node2D" unique_id=1541383456]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "This is a text lol"
+label_settings = SubResource("LabelSettings_wsebr")
