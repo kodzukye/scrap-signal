@@ -1,13 +1,20 @@
 [gd_scene format=3 uid="uid://c5lskgqkorw6v"]
 
+[ext_resource type="Script" uid="uid://dgjqqygp6oydl" path="res://tests/main_test.gd" id="1_ctdtd"]
+[ext_resource type="PackedScene" uid="uid://mh3msmluve7p" path="res://entities/player/player.tscn" id="3_pi5dy"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_wsebr"]
 
 [node name="Main" type="Node2D" unique_id=42454470]
 
 [node name="Node2D" type="Node2D" parent="." unique_id=87146710]
+script = ExtResource("1_ctdtd")
 
 [node name="Label" type="Label" parent="Node2D" unique_id=1541383456]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "This is a text lol"
 label_settings = SubResource("LabelSettings_wsebr")
+
+[node name="Player" parent="Node2D" unique_id=628518902 instance=ExtResource("3_pi5dy")]
+position = Vector2(158, 121)
