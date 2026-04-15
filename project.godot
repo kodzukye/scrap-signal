@@ -16,6 +16,12 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*uid://dj5xpo55gtvr7"
+AudioManager="uid://dsilww05kuakm"
+SceneManager="uid://cqmks3a5dsxuy"
+
 [display]
 
 window/size/viewport_width=320

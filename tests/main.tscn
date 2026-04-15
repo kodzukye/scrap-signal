@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dgjqqygp6oydl" path="res://tests/main_test.gd" id="1_ctdtd"]
 [ext_resource type="Texture2D" uid="uid://b2j1csoujc7gc" path="res://tests/assets/tileset/Dungeon_Tileset.png" id="2_pi5dy"]
 [ext_resource type="PackedScene" uid="uid://mh3msmluve7p" path="res://entities/player/player.tscn" id="3_pi5dy"]
+[ext_resource type="PackedScene" uid="uid://grs5ypwkxv3x" path="res://entities/items/item.tscn" id="4_gn22r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gn22r"]
 texture = ExtResource("2_pi5dy")
@@ -154,3 +155,12 @@ label_settings = SubResource("LabelSettings_wsebr")
 
 [node name="Player" parent="Node2D" unique_id=628518902 instance=ExtResource("3_pi5dy")]
 position = Vector2(158, 121)
+
+[node name="Item" parent="Node2D" unique_id=1691516870 instance=ExtResource("4_gn22r")]
+position = Vector2(237, 94)
+
+[node name="Item2" parent="Node2D" unique_id=738262451 instance=ExtResource("4_gn22r")]
+position = Vector2(288, 162)
+
+[node name="Item3" parent="Node2D" unique_id=589131931 instance=ExtResource("4_gn22r")]
+position = Vector2(186, 210)
