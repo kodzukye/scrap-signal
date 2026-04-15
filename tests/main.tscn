@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b2j1csoujc7gc" path="res://tests/assets/tileset/Dungeon_Tileset.png" id="2_pi5dy"]
 [ext_resource type="PackedScene" uid="uid://mh3msmluve7p" path="res://entities/player/player.tscn" id="3_pi5dy"]
 [ext_resource type="PackedScene" uid="uid://grs5ypwkxv3x" path="res://entities/items/item.tscn" id="4_gn22r"]
+[ext_resource type="PackedScene" uid="uid://o7qrmpywwhu8" path="res://ui/hud.tscn" id="5_cb43m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gn22r"]
 texture = ExtResource("2_pi5dy")
@@ -164,3 +165,6 @@ position = Vector2(288, 162)
 
 [node name="Item3" parent="Node2D" unique_id=589131931 instance=ExtResource("4_gn22r")]
 position = Vector2(186, 210)
+
+[node name="Hud" parent="Node2D" unique_id=1774402684 instance=ExtResource("5_cb43m")]
+position = Vector2(98, 108)

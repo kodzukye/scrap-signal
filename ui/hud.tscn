@@ -1,3 +1,55 @@
 [gd_scene format=3 uid="uid://o7qrmpywwhu8"]
 
+[ext_resource type="Script" uid="uid://bmqknwqr5mtd6" path="res://ui/hud.gd" id="1_rbyyf"]
+[ext_resource type="Texture2D" uid="uid://bt7xdf44qq2ud" path="res://tests/assets/sprites/ui/inventory_item_back.png" id="2_276te"]
+
 [node name="Hud" type="Node2D" unique_id=1774402684]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1046780358]
+script = ExtResource("1_rbyyf")
+
+[node name="InventoryPanel" type="VBoxContainer" parent="HUD" unique_id=260352894]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+offset_right = 320.0
+grow_vertical = 0
+alignment = 2
+
+[node name="Label" type="Label" parent="HUD/InventoryPanel" unique_id=187015042]
+layout_mode = 2
+text = "Inventory"
+
+[node name="Engrenage" type="HBoxContainer" parent="HUD/InventoryPanel" unique_id=861641794]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/InventoryPanel/Engrenage" unique_id=397063473]
+layout_mode = 2
+texture = ExtResource("2_276te")
+stretch_mode = 3
+
+[node name="Count" type="Label" parent="HUD/InventoryPanel/Engrenage" unique_id=650103914]
+layout_mode = 2
+
+[node name="Cable" type="HBoxContainer" parent="HUD/InventoryPanel" unique_id=1723351300]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/InventoryPanel/Cable" unique_id=195427130]
+layout_mode = 2
+texture = ExtResource("2_276te")
+stretch_mode = 3
+
+[node name="Count" type="Label" parent="HUD/InventoryPanel/Cable" unique_id=20736457]
+layout_mode = 2
+
+[node name="Circuit" type="HBoxContainer" parent="HUD/InventoryPanel" unique_id=578252295]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/InventoryPanel/Circuit" unique_id=1833323471]
+layout_mode = 2
+texture = ExtResource("2_276te")
+stretch_mode = 3
+
+[node name="Count" type="Label" parent="HUD/InventoryPanel/Circuit" unique_id=375460837]
+layout_mode = 2
