@@ -2,6 +2,7 @@ class_name RepairZone
 extends Area2D
 
 @export var npc_id : String = "vrac7"
+@export var prompt_text : String = "[E] Repair"
 
 signal repair_requested(npc_id: String)
 

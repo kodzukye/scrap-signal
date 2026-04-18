@@ -1,15 +1,24 @@
+class_name HUD
 extends CanvasLayer
 
-# Slots : dictionnaire item_id → Label du compteur
 @onready var slots := {
 	"engrenage": $InventoryBar/ItemRow/EngrenageSlot/Count,
 	"cable":     $InventoryBar/ItemRow/CableSlot/Count,
 	"circuit":   $InventoryBar/ItemRow/CircuitSlot/Count,
 }
+@onready var interact_prompt := $InteractPrompt
+@onready var prompt_label    := $InteractPrompt/PromptLabel
 
 func _ready() -> void:
 	GameState.inventory_changed.connect(_refresh)
 	_refresh()
+
+func show_prompt(text: String) -> void:
+	prompt_label.text = text
+	interact_prompt.visible = true
+
+func hide_prompt() -> void:
+	interact_prompt.visible = false
 
 func _refresh() -> void:
 	for item_id in slots:

@@ -2,6 +2,7 @@ extends Area2D
 
 @export var item_id   : String = "engrenage"
 @export var item_name : String = "Engrenage"
+@export var prompt_text : String = "[E] Take"
 
 func interact() -> void:
 	GameState.add_item(item_id)

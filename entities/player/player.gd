@@ -5,6 +5,8 @@ const SPEED := 120
 @onready var sprite := $AnimatedSprite2D
 @onready var interaction_area := $InteractionArea
 
+@onready var hud : HUD = get_tree().get_first_node_in_group("hud")
+
 var last_direction := Vector2.DOWN
 var interactable : Node = null
 
@@ -41,10 +43,14 @@ func _dir_name(dir: Vector2) -> String:
 
 # --- Interaction ---
 func _on_interaction_area_area_entered(area: Area2D) -> void:
-	print("Area détectée : ", area.name)
+	print("Area détectée : ", area.name, " | has interact: ", area.has_method("interact"))
 	if area.has_method("interact"):
 		interactable = area
+		if hud:
+			hud.show_prompt(area.prompt_text if "prompt_text" in area else "[E] Interagir")
 
 func _on_interaction_area_area_exited(area: Area2D) -> void:
 	if area == interactable:
 		interactable = null
+		if hud:
+			hud.hide_prompt()
