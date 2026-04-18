@@ -13,11 +13,18 @@ var repaired := {
 	"iris3": false,
 }
 var inventory := {}
+var flags := {}
+
+func get_flag(key: String) -> bool:
+	return flags.get(key, false)
+
+func set_flag(key: String, value: bool) -> void:
+	flags[key] = value
 
 # Items
-func add_item(id: String) -> void:
+func add_item(id: String, amount: int = 1) -> void:
 	if inventory.has(id):
-		inventory[id] += 1
+		inventory[id] += amount
 		inventory_changed.emit()
 	else:
 		inventory[id] = 1
@@ -27,11 +34,11 @@ func add_item(id: String) -> void:
 func has_item(id: String) -> bool:
 	return inventory.get(id, 0) > 0
 
-func remove_item(id: String) -> void:
-	if has_item(id):
-		inventory[id] -= 1
-		if inventory[id] <= 0:
-			inventory.erase(id)
+func remove_item(item_id: String, amount: int) -> void:
+	if inventory.has(item_id):
+		inventory[item_id] -= amount
+		if inventory[item_id] <= 0:
+			inventory.erase(item_id)
 		inventory_changed.emit()
 
 # Robots repairs
@@ -50,6 +57,6 @@ func complete_repair(npc_id: String) -> void:
 	# Consomme les pièces
 	var required = REPAIR_REQUIREMENTS[npc_id]
 	for item_id in required:
-		remove_item(item_id)
+		remove_item(item_id, required[item_id])
 	repaired[npc_id] = true
 	print("Réparation terminée : ", npc_id)

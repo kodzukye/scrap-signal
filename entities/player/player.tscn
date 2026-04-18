@@ -508,31 +508,29 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bectd"]
 size = Vector2(45.375, 42.84375)
 
-[node name="Player" type="Node2D" unique_id=628518902]
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=92363508]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1424887591]
 collision_layer = 3
 script = ExtResource("1_fkugw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=865652003]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2097287881]
 shape = SubResource("CapsuleShape2D_26q78")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1653637445]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1266755049]
 zoom = Vector2(0.75, 0.75)
 position_smoothing_enabled = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1859344504]
-position = Vector2(-1, -12)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1926532622]
+position = Vector2(-1, -8)
 sprite_frames = SubResource("SpriteFrames_ix1gt")
 animation = &"walk_right"
 autoplay = "idle_down"
 
-[node name="InteractionArea" type="Area2D" parent="CharacterBody2D" unique_id=22124935]
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1623204784]
 position = Vector2(-1, -12)
 collision_layer = 16
 collision_mask = 12
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/InteractionArea" unique_id=51125783]
-position = Vector2(2, 7)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=446150610]
+position = Vector2(1, 9)
 shape = SubResource("RectangleShape2D_bectd")
 debug_color = Color(0.9411765, 0, 0.29411766, 0.19607843)

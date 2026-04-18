@@ -11,6 +11,7 @@ border_width_bottom = 1
 border_color = Color(0.53333336, 0.53333336, 0.53333336, 1)
 
 [node name="DialogueBox" type="Node2D" unique_id=1374394268]
+z_index = 500
 
 [node name="DialogueBox" type="CanvasLayer" parent="." unique_id=1732454601 groups=["dialogue_box"]]
 script = ExtResource("1_2ix3t")

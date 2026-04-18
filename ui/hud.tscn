@@ -8,15 +8,16 @@ border_width_top = 1
 border_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
 border_blend = true
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_546lt"]
+bg_color = Color(0, 0, 0, 0.6)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_276te"]
 bg_color = Color(0, 0, 0, 0.003921569)
 
-[node name="Hud" type="Node2D" unique_id=1774402684]
-
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1046780358 groups=["hud"]]
+[node name="HUD" type="CanvasLayer" unique_id=1746360319 groups=["hud"]]
 script = ExtResource("1_rbyyf")
 
-[node name="InventoryBar" type="PanelContainer" parent="HUD" unique_id=255970268]
+[node name="InventoryBar" type="PanelContainer" parent="." unique_id=1523829052]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -26,42 +27,61 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rbyyf")
 
-[node name="ItemRow" type="HBoxContainer" parent="HUD/InventoryBar" unique_id=616700836]
+[node name="ItemRow" type="HBoxContainer" parent="InventoryBar" unique_id=279840989]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="EngrenageSlot" type="HBoxContainer" parent="HUD/InventoryBar/ItemRow" unique_id=615738426]
+[node name="EngrenageSlot" type="HBoxContainer" parent="InventoryBar/ItemRow" unique_id=237860192]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/ItemRow/EngrenageSlot" unique_id=1435745466]
+[node name="Icon" type="TextureRect" parent="InventoryBar/ItemRow/EngrenageSlot" unique_id=1231030010]
 layout_mode = 2
 
-[node name="Count" type="Label" parent="HUD/InventoryBar/ItemRow/EngrenageSlot" unique_id=1082443403]
-layout_mode = 2
-theme_override_font_sizes/font_size = 6
-
-[node name="CableSlot" type="HBoxContainer" parent="HUD/InventoryBar/ItemRow" unique_id=1777823230]
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/ItemRow/CableSlot" unique_id=1512420928]
-layout_mode = 2
-
-[node name="Count" type="Label" parent="HUD/InventoryBar/ItemRow/CableSlot" unique_id=241891402]
+[node name="Count" type="Label" parent="InventoryBar/ItemRow/EngrenageSlot" unique_id=1232241990]
 layout_mode = 2
 theme_override_font_sizes/font_size = 6
 
-[node name="CircuitSlot" type="HBoxContainer" parent="HUD/InventoryBar/ItemRow" unique_id=707078098]
+[node name="CableSlot" type="HBoxContainer" parent="InventoryBar/ItemRow" unique_id=1605493752]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="HUD/InventoryBar/ItemRow/CircuitSlot" unique_id=273462465]
+[node name="Icon" type="TextureRect" parent="InventoryBar/ItemRow/CableSlot" unique_id=1278175009]
 layout_mode = 2
 
-[node name="Count" type="Label" parent="HUD/InventoryBar/ItemRow/CircuitSlot" unique_id=766125092]
+[node name="Count" type="Label" parent="InventoryBar/ItemRow/CableSlot" unique_id=1479768730]
 layout_mode = 2
 theme_override_font_sizes/font_size = 6
 
-[node name="InteractPrompt" type="PanelContainer" parent="HUD" unique_id=1666962404]
+[node name="CircuitSlot" type="HBoxContainer" parent="InventoryBar/ItemRow" unique_id=2106106895]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="InventoryBar/ItemRow/CircuitSlot" unique_id=1469623782]
+layout_mode = 2
+
+[node name="Count" type="Label" parent="InventoryBar/ItemRow/CircuitSlot" unique_id=2121401937]
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+
+[node name="LogContainer" type="PanelContainer" parent="." unique_id=2020517372]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_546lt")
+
+[node name="LogLabel" type="RichTextLabel" parent="LogContainer" unique_id=957446787]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+bbcode_enabled = true
+fit_content = true
+
+[node name="InteractPrompt" type="PanelContainer" parent="." unique_id=1303778847]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -75,7 +95,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_276te")
 
-[node name="PromptLabel" type="Label" parent="HUD/InteractPrompt" unique_id=1518438846]
+[node name="PromptLabel" type="Label" parent="InteractPrompt" unique_id=924240162]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.39215687)
 theme_override_constants/shadow_offset_x = 0

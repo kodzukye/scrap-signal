@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Scrap Signal"
-run/main_scene="uid://c5lskgqkorw6v"
+run/main_scene="uid://kmybl0c637as"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=60
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
 
 [autoload]

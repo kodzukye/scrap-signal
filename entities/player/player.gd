@@ -9,8 +9,15 @@ const SPEED := 120
 
 var last_direction := Vector2.DOWN
 var interactable : Node = null
+var is_locked := false :
+	set(value):
+		is_locked = value
+		if value:
+			velocity = Vector2.ZERO
+			sprite.play("idle_" + _dir_name(last_direction))
 
 func _ready() -> void:
+	add_to_group("player")
 	interaction_area.area_entered.connect(_on_interaction_area_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_area_exited)
 

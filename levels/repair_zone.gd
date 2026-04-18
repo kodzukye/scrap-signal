@@ -7,11 +7,21 @@ extends Area2D
 signal repair_requested(npc_id: String)
 
 func interact() -> void:
-	print("interact() appelé sur RepairZone")
-	print("can_repair : ", GameState.can_repair(npc_id))
-	print("inventaire : ", GameState.inventory)
 	if GameState.can_repair(npc_id):
 		repair_requested.emit(npc_id)
 		print("Lancement mini-jeu pour : ", npc_id)
+		_start_repair()
 	else:
 		print("Pièces manquantes pour réparer ", npc_id)
+
+# Dans le script du PNJ, quand les items sont validés
+func _start_repair() -> void:
+	var minigame = preload("res://ui/minigame/repair_minigame.tscn").instantiate()
+	get_tree().root.add_child(minigame)
+	minigame.repair_complete.connect(_on_repair_done)
+	minigame.open("vrac7")
+
+func _on_repair_done() -> void:
+	GameState.set_flag("vrac7_repaired", true)
+	# dialogue_system.start("vrac7_post_repair")
+	# → [LOG] "Unité VRAC-7 : réparation complète. Statut : opérationnel."
