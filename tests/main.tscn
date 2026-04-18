@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://grs5ypwkxv3x" path="res://entities/items/item.tscn" id="4_gn22r"]
 [ext_resource type="PackedScene" uid="uid://o7qrmpywwhu8" path="res://ui/hud.tscn" id="5_cb43m"]
 [ext_resource type="PackedScene" uid="uid://d5r0so1s8rf8" path="res://levels/repair_zone.tscn" id="6_y6b0w"]
+[ext_resource type="PackedScene" uid="uid://bb3olg2rlygdc" path="res://entities/npcs/vrac7/vrac7.tscn" id="7_pskfe"]
+[ext_resource type="PackedScene" uid="uid://jrjxu1xfx0ud" path="res://ui/dialogue_box.tscn" id="8_rdsdc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gn22r"]
 texture = ExtResource("2_pi5dy")
@@ -172,3 +174,9 @@ position = Vector2(98, 108)
 
 [node name="RepairZone" parent="Node2D" unique_id=2043534964 groups=["repair_zones"] instance=ExtResource("6_y6b0w")]
 position = Vector2(224, 145)
+
+[node name="Vrac7" parent="Node2D" unique_id=829712169 instance=ExtResource("7_pskfe")]
+position = Vector2(63, 114)
+
+[node name="DialogueBox" parent="Node2D" unique_id=1374394268 instance=ExtResource("8_rdsdc")]
+position = Vector2(83, 63)

@@ -1,3 +1,30 @@
 [gd_scene format=3 uid="uid://bb3olg2rlygdc"]
 
+[ext_resource type="Script" uid="uid://bs7rvg7tfjm34" path="res://entities/npcs/vrac7/vrac7.gd" id="1_vwl5e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vwl5e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vwl5e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xy6tt"]
+size = Vector2(58, 37)
+
 [node name="Vrac7" type="Node2D" unique_id=829712169]
+
+[node name="Vrac7" type="Area2D" parent="." unique_id=1007989436]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_vwl5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vrac7" unique_id=611475091]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_vwl5e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Vrac7" unique_id=1428714736]
+sprite_frames = SubResource("SpriteFrames_vwl5e")
+
+[node name="InteractionZone" type="Area2D" parent="Vrac7" unique_id=1655089634]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vrac7/InteractionZone" unique_id=1264953620]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_xy6tt")
