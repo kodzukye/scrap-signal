@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
 const SPEED := 120
+const TILE_SIZE := 16
 
 @onready var sprite := $AnimatedSprite2D
 @onready var interaction_area := $InteractionArea
+@onready var push_ray := $PushRay
 
 @onready var hud : HUD = get_tree().get_first_node_in_group("hud")
 
@@ -20,15 +22,39 @@ func _ready() -> void:
 	add_to_group("player")
 	interaction_area.area_entered.connect(_on_interaction_area_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_area_exited)
+	if push_ray:
+		push_ray.target_position = Vector2(17, 0)
 
 func _physics_process(_delta: float) -> void:
+	if is_locked:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+		
 	var direction := Input.get_vector(
 		"move_left", "move_right", "move_up", "move_down"
 	)
+	
+	if push_ray and direction != Vector2.ZERO:
+		var dominant := _dominant_direction(direction)
+		push_ray.target_position = dominant * (TILE_SIZE / 2.0 + 1)
+		push_ray.force_raycast_update()
+
+		if push_ray.is_colliding():
+			var collider = push_ray.get_collider()
+			if collider is PushableBox:
+				collider.try_push(dominant, TILE_SIZE)
+	
 	velocity = direction * SPEED
 	move_and_slide()
 	position = position.round()
 	_update_animation(direction)
+	
+func _dominant_direction(dir: Vector2) -> Vector2:
+	if abs(dir.x) > abs(dir.y):
+		return Vector2(sign(dir.x), 0)
+	else:
+		return Vector2(0, sign(dir.y))
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and interactable:

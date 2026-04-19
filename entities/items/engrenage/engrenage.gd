@@ -7,4 +7,4 @@ extends Area2D
 func interact() -> void:
 	GameState.add_item(item_id)
 	print("Ramassé : ", item_name)
-	queue_free()
+	queue_free()  # supprime l'item de la scène

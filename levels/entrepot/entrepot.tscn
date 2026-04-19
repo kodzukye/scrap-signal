@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bb3olg2rlygdc" path="res://entities/npcs/vrac7/vrac7.tscn" id="3_jr8qv"]
 [ext_resource type="PackedScene" uid="uid://jrjxu1xfx0ud" path="res://ui/dialogue_box.tscn" id="5_s155k"]
 [ext_resource type="PackedScene" uid="uid://o7qrmpywwhu8" path="res://ui/hud.tscn" id="6_kejd5"]
-[ext_resource type="PackedScene" uid="uid://grs5ypwkxv3x" path="res://entities/items/item.tscn" id="6_srx2q"]
+[ext_resource type="PackedScene" uid="uid://cge56ob5tt4o6" path="res://entities/items/engrenage/engrenage.tscn" id="7_1p1pm"]
+[ext_resource type="PackedScene" uid="uid://1x65ioo8tdro" path="res://entities/items/pushable box/pushable_box.tscn" id="7_dm063"]
+[ext_resource type="PackedScene" uid="uid://c52luh50w8hi2" path="res://levels/unlock_zone.tscn" id="8_dm063"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n70cd"]
 texture = ExtResource("1_qvgxo")
@@ -149,7 +151,6 @@ sources/0 = SubResource("TileSetAtlasSource_n70cd")
 script = ExtResource("1_ptc2q")
 
 [node name="Hud" parent="." unique_id=1774402684 instance=ExtResource("6_kejd5")]
-position = Vector2(199, 301)
 
 [node name="DialogueBox" parent="." unique_id=1374394268 instance=ExtResource("5_s155k")]
 position = Vector2(-118, 137)
@@ -196,8 +197,20 @@ tile_set = SubResource("TileSet_jr8qv")
 [node name="Other" type="TileMapLayer" parent="Map" unique_id=985720640]
 tile_set = SubResource("TileSet_jr8qv")
 
-[node name="Item" parent="Map" unique_id=1691516870 instance=ExtResource("6_srx2q")]
-position = Vector2(136, 263)
+[node name="Engrenage" parent="Map" unique_id=46489013 instance=ExtResource("7_1p1pm")]
+position = Vector2(167, 263)
+
+[node name="HiddenEngrenage" parent="Map" unique_id=1691516870 instance=ExtResource("7_1p1pm")]
+visible = false
+position = Vector2(455, 328)
+
+[node name="PushableBox" parent="Map" unique_id=418482729 instance=ExtResource("7_dm063")]
+position = Vector2(392, 420)
+
+[node name="UnlockZone" parent="Map" unique_id=448954065 instance=ExtResource("8_dm063")]
+position = Vector2(458, 376)
+scale = Vector2(5, 6.5)
+node_to_reveal = NodePath("../HiddenEngrenage")
 
 [node name="Player" parent="." unique_id=628518902 instance=ExtResource("2_n70cd")]
 z_index = 1

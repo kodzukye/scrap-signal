@@ -118,7 +118,7 @@ func _on_repair_done() -> void:
 	var hud: HUD = get_tree().get_first_node_in_group("hud")
 	if hud:
 		hud.show_log("Unité VRAC-7 : réparation complète. Statut : opérationnel.")
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(3).timeout
 		hud.show_log("Clé magnétique obtenue. Accès atelier déverrouillé.")
 
 	# Dialogue post-réparation
