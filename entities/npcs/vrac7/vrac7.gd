@@ -62,7 +62,7 @@ func interact() -> void:
 	if hud:
 		hud.hide_prompt()
 
-	var dialogue_box: DialogueBox = get_tree().get_first_node_in_group("dialogue_box")
+	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
 	if not dialogue_box:
 		return
 
@@ -94,7 +94,7 @@ func interact() -> void:
 # ── Mini-jeu ──────────────────────────────────────────────────────────────────
 
 func _start_minigame() -> void:
-	var dialogue_box: DialogueBox = get_tree().get_first_node_in_group("dialogue_box")
+	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
 	if dialogue_box:
 		dialogue_box.hide()
 	var minigame_node := preload("res://ui/minigame/repair_minigame.tscn").instantiate()
@@ -122,7 +122,7 @@ func _on_repair_done() -> void:
 		hud.show_log("Clé magnétique obtenue. Accès atelier déverrouillé.")
 
 	# Dialogue post-réparation
-	var dialogue_box: DialogueBox = get_tree().get_first_node_in_group("dialogue_box")
+	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
 	if dialogue_box:
 		dialogue_box.start(DIALOGUE_POST_REPAIR)
 

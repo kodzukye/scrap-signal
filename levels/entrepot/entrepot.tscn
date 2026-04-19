@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cge56ob5tt4o6" path="res://entities/items/engrenage/engrenage.tscn" id="7_1p1pm"]
 [ext_resource type="PackedScene" uid="uid://1x65ioo8tdro" path="res://entities/items/pushable box/pushable_box.tscn" id="7_dm063"]
 [ext_resource type="PackedScene" uid="uid://c52luh50w8hi2" path="res://levels/unlock_zone.tscn" id="8_dm063"]
+[ext_resource type="PackedScene" uid="uid://fftu7ne6spjy" path="res://levels/entrepot/etagere.tscn" id="9_sju6u"]
+[ext_resource type="PackedScene" uid="uid://do61r73dbypfd" path="res://levels/journal.tscn" id="10_b870l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n70cd"]
 texture = ExtResource("1_qvgxo")
@@ -211,6 +213,18 @@ position = Vector2(392, 420)
 position = Vector2(458, 376)
 scale = Vector2(5, 6.5)
 node_to_reveal = NodePath("../HiddenEngrenage")
+
+[node name="Etagere" parent="Map" unique_id=2130339636 instance=ExtResource("9_sju6u")]
+position = Vector2(408, 277)
+
+[node name="Etagere2" parent="Map" unique_id=1943291775 instance=ExtResource("9_sju6u")]
+position = Vector2(184, 83)
+
+[node name="Etagere3" parent="Map" unique_id=565472517 instance=ExtResource("9_sju6u")]
+position = Vector2(312, 85)
+
+[node name="Journal" parent="Map" unique_id=2014306468 instance=ExtResource("10_b870l")]
+position = Vector2(456, 199)
 
 [node name="Player" parent="." unique_id=628518902 instance=ExtResource("2_n70cd")]
 z_index = 1
