@@ -6,5 +6,7 @@ extends Area2D
 
 func interact() -> void:
 	GameState.add_item(item_id)
-	print("Ramassé : ", item_name)
+	var hud := get_tree().get_first_node_in_group("hud")
+	if hud and hud.has_method("show_log"):
+		hud.show_log("LOG  %s récupéré. Inventaire mis à jour." % item_id)
 	queue_free()

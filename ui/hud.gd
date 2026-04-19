@@ -42,6 +42,6 @@ func show_log(message: String) -> void:
 
 	# Disparaît après 3 secondes avec un fade out
 	_log_tween = create_tween()
-	_log_tween.tween_interval(2.5)
+	_log_tween.tween_interval(3.5)
 	_log_tween.tween_property(log_container, "modulate:a", 0.0, 0.5)
 	_log_tween.tween_callback(log_container.hide)

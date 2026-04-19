@@ -1,0 +1,51 @@
+extends Node
+
+const LOGS := [
+	"INITIALIZING SYSTEM...",
+	"LAST SAVE: 847 DAYS AGO.",
+	"MISSING DATA: 847 DAYS.",
+	"UNIT SCRAP-09... BACK ONLINE.",
+]
+
+const CHAR_DELAY := 0.04 
+const LINE_PAUSE := 2 
+const CURSOR := "_"
+
+@onready var log_label    := $CanvasLayer/LogLabel
+@onready var background   := $CanvasLayer/Background
+
+var _full_text := ""
+var _cursor_visible := true
+
+func _ready() -> void:
+	log_label.text = ""
+	_start_cursor_blink()
+	_play_sequence()
+
+func _start_cursor_blink() -> void:
+	var t := create_tween().set_loops()
+	t.tween_callback(_toggle_cursor).set_delay(0.5)
+
+func _toggle_cursor() -> void:
+	_cursor_visible = !_cursor_visible
+	log_label.text = _full_text + (CURSOR if _cursor_visible else " ")
+
+func _play_sequence() -> void:
+	for line in LOGS:
+		await _type_line(line)
+		await get_tree().create_timer(LINE_PAUSE).timeout
+		_full_text += "\n"
+
+	await get_tree().create_timer(1).timeout
+
+	# Fade out
+	var tween := create_tween()
+	tween.tween_property(background, "modulate:a", 0.0, 1.2)
+	await tween.finished
+	get_tree().change_scene_to_file("res://levels/entrepot/entrepot.tscn")
+
+func _type_line(line: String) -> void:
+	for i in line.length():
+		_full_text += line[i]
+		log_label.text = _full_text + CURSOR
+		await get_tree().create_timer(CHAR_DELAY).timeout

@@ -75,11 +75,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_546lt")
 [node name="LogLabel" type="RichTextLabel" parent="LogContainer" unique_id=957446787]
 layout_mode = 2
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/bold_font_size = 8
-theme_override_font_sizes/bold_italics_font_size = 8
-theme_override_font_sizes/italics_font_size = 8
-theme_override_font_sizes/mono_font_size = 8
+theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/bold_font_size = 6
+theme_override_font_sizes/bold_italics_font_size = 6
+theme_override_font_sizes/italics_font_size = 6
+theme_override_font_sizes/mono_font_size = 6
 bbcode_enabled = true
 fit_content = true
 
