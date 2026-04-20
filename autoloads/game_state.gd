@@ -1,6 +1,7 @@
 extends Node
 
 signal inventory_changed
+signal flag_changed(key: String, value: bool)
 
 # Pièces requises par PNJ
 const REPAIR_REQUIREMENTS := {
@@ -20,6 +21,7 @@ func get_flag(key: String) -> bool:
 
 func set_flag(key: String, value: bool) -> void:
 	flags[key] = value
+	flag_changed.emit(key, value)
 
 # Items
 func add_item(id: String, amount: int = 1) -> void:
