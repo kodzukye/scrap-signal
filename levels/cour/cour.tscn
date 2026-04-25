@@ -1,3 +1,17 @@
 [gd_scene format=3 uid="uid://cf5xm3p02u8w0"]
 
+[ext_resource type="PackedScene" uid="uid://o7qrmpywwhu8" path="res://ui/hud.tscn" id="1_w6px7"]
+[ext_resource type="PackedScene" uid="uid://jrjxu1xfx0ud" path="res://ui/dialogue_box.tscn" id="2_prv2q"]
+[ext_resource type="PackedScene" uid="uid://mh3msmluve7p" path="res://entities/player/player.tscn" id="3_rwjhc"]
+
 [node name="Cour" type="Node2D" unique_id=868441179]
+
+[node name="HUD" parent="." unique_id=1746360319 instance=ExtResource("1_w6px7")]
+
+[node name="DialogueBox" parent="." unique_id=1374394268 instance=ExtResource("2_prv2q")]
+
+[node name="Map" type="Node" parent="." unique_id=1330031516]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Map" unique_id=1564100326]
+
+[node name="Player" parent="." unique_id=1424887591 instance=ExtResource("3_rwjhc")]
