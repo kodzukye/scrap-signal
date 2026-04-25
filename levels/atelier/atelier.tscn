@@ -108,10 +108,10 @@ position = Vector2(57, 633)
 position = Vector2(120, 632)
 
 [node name="PushableBox3" parent="Map/Pushables" unique_id=777845559 instance=ExtResource("5_m45hf")]
-position = Vector2(151, 666)
+position = Vector2(151, 669)
 
 [node name="PushableBox10" parent="Map/Pushables" unique_id=446726968 instance=ExtResource("5_m45hf")]
-position = Vector2(185, 666)
+position = Vector2(185, 669)
 
 [node name="PushableBox4" parent="Map/Pushables" unique_id=953338874 instance=ExtResource("5_m45hf")]
 position = Vector2(185, 633)
@@ -223,7 +223,7 @@ open_sprite = ExtResource("13_j0ghu")
 [node name="LoadingZone" parent="Map/Hidden Room" unique_id=2123510357 instance=ExtResource("15_ifag7")]
 position = Vector2(-40, 695)
 scale = Vector2(1.5, 3)
-target_scene = "res://levels/atelier/cour.tscn"
+target_scene = "res://levels/cour/cour.tscn"
 
 [node name="Cover Wall" type="TileMapLayer" parent="Map/Hidden Room" unique_id=1737801025]
 tile_map_data = PackedByteArray("AAAHACsAAQABAAEAAAADACsAAQABAAEAAAAFACsAAQABAAEAAAADAC0AAQABAAIAAAAFAC0AAQABAAIAAAAHAC0AAQABAAIAAAA=")

@@ -15,7 +15,7 @@ const DIALOGUE_INTRO := [
 
 const DIALOGUE_MISSING_ITEMS := [
 	{ "name": "VRAC-7", "text": "Pas encore les pièces ? L'entrepôt est grand." },
-	{ "name": "VRAC-7", "text": "Les engrenages sont tombés près des étagères quelque part. Un semble ^" },
+	{ "name": "VRAC-7", "text": "Les engrenages sont tombés près des étagères quelque part. Un semble etre caché, les autres sont éparpillés autre part." },
 ]
 
 const DIALOGUE_HAS_ITEMS := [
