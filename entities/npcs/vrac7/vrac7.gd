@@ -3,17 +3,19 @@ class_name Vrac7
 
 @export var prompt_text: String = "[E] Parler"
 
+@onready var sprite := $AnimatedSprite2D
+
 # ── Dialogues ────────────────────────────────────────────────────────────────
 
 const DIALOGUE_INTRO := [
-	{ "name": "VRAC-7", "text": "Toi... tu es nouveau ? Non, attends — SCRAP-09 ? Tu as dormi longtemps. Très longtemps." },
+	{ "name": "VRAC-7", "text": "Toi... tu es nouveau ? Non, attends— SCRAP-09 ? Tu as dormi longtemps. Très longtemps." },
 	{ "name": "VRAC-7", "text": "Je suis coincé sous cette étagère depuis... je ne sais plus. Tu peux m'aider ?" },
-	{ "name": "VRAC-7", "text": "Il me faut 1 engrenage et 1 câble. J'en ai vu par là dans l'entrepôt." },
+	{ "name": "VRAC-7", "text": "Il me faut 3 engrenages. J'en ai vu par là dans l'entrepôt." },
 ]
 
 const DIALOGUE_MISSING_ITEMS := [
 	{ "name": "VRAC-7", "text": "Pas encore les pièces ? L'entrepôt est grand." },
-	{ "name": "VRAC-7", "text": "Les engrenages sont tombés derrière les étagères du fond. Les câbles, je les ai vus rouler vers la sortie ouest le jour où tout s'est effondré." },
+	{ "name": "VRAC-7", "text": "Les engrenages sont tombés près des étagères quelque part. Un semble ^" },
 ]
 
 const DIALOGUE_HAS_ITEMS := [
@@ -34,7 +36,7 @@ const DIALOGUE_AFTER_ATELIER := [
 # ── Items requis ──────────────────────────────────────────────────────────────
 
 const REQUIRED_ITEMS := {
-	"engrenage": 1,
+	"engrenage": 3,
 }
 
 # ── Lifecycle ─────────────────────────────────────────────────────────────────
@@ -106,9 +108,10 @@ func _start_minigame() -> void:
 	minigame.open("vrac7")
 
 func _on_repair_done() -> void:
+	sprite.play("repaired")
+	
 	# Consomme les items
-	GameState.remove_item("engrenage", 1)
-	GameState.remove_item("cable", 1)
+	GameState.remove_item("engrenage", 3)
 
 	# Donne la clé de l'atelier
 	GameState.add_item("cle_atelier", 1)

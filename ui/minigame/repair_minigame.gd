@@ -11,7 +11,11 @@ const PUZZLES := {
 	"iris3": {
 		"title": "RECALIBRATION — CAPTEUR OPTIQUE",
 		"connections": [[0, 1], [2, 3]]
-	}
+	},
+	"scrap09": { 
+		"title": "AUTO-RÉPARATION — SCRAP-09",
+		"connections": [[0, 0], [1, 2], [2, 3]]
+	},
 }
 
 const GRID_SIZE := 4

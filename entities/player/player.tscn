@@ -508,7 +508,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bectd"]
 size = Vector2(45.375, 42.84375)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1424887591]
+[node name="Player" type="CharacterBody2D" unique_id=1424887591]
 collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_fkugw")

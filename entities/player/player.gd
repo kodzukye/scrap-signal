@@ -42,7 +42,7 @@ func _physics_process(_delta: float) -> void:
 
 		if push_ray.is_colliding():
 			var collider = push_ray.get_collider()
-			if collider is PushableBox:
+			if collider.is_in_group("pushable"):
 				collider.try_push(dominant, TILE_SIZE)
 	
 	velocity = direction * SPEED

@@ -3,7 +3,6 @@ extends CanvasLayer
 
 @onready var slots := {
 	"engrenage": $InventoryBar/ItemRow/EngrenageSlot/Count,
-	"cable":     $InventoryBar/ItemRow/CableSlot/Count,
 	"circuit":   $InventoryBar/ItemRow/CircuitSlot/Count,
 }
 @onready var interact_prompt := $InteractPrompt

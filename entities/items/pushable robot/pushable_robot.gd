@@ -1,4 +1,4 @@
-class_name PushableRobot
+class_name PushableBox
 extends CharacterBody2D
 
 @onready var _area := $DetectionArea

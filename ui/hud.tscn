@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bmqknwqr5mtd6" path="res://ui/hud.gd" id="1_rbyyf"]
 [ext_resource type="Texture2D" uid="uid://b1f05yx168iat" path="res://assets/sprites/engrenage.png" id="2_276te"]
+[ext_resource type="Texture2D" uid="uid://cn2tcan6yqtjo" path="res://assets/sprites/circuit.png" id="3_546lt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbyyf"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.84705883)
@@ -23,7 +24,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
+offset_top = -33.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_rbyyf")
@@ -35,6 +36,7 @@ alignment = 1
 
 [node name="EngrenageSlot" type="HBoxContainer" parent="InventoryBar/ItemRow" unique_id=237860192]
 layout_mode = 2
+alignment = 1
 
 [node name="Icon" type="TextureRect" parent="InventoryBar/ItemRow/EngrenageSlot" unique_id=1231030010]
 layout_mode = 2
@@ -44,21 +46,13 @@ texture = ExtResource("2_276te")
 layout_mode = 2
 theme_override_font_sizes/font_size = 6
 
-[node name="CableSlot" type="HBoxContainer" parent="InventoryBar/ItemRow" unique_id=1605493752]
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="InventoryBar/ItemRow/CableSlot" unique_id=1278175009]
-layout_mode = 2
-
-[node name="Count" type="Label" parent="InventoryBar/ItemRow/CableSlot" unique_id=1479768730]
-layout_mode = 2
-theme_override_font_sizes/font_size = 6
-
 [node name="CircuitSlot" type="HBoxContainer" parent="InventoryBar/ItemRow" unique_id=2106106895]
 layout_mode = 2
+alignment = 1
 
 [node name="Icon" type="TextureRect" parent="InventoryBar/ItemRow/CircuitSlot" unique_id=1469623782]
 layout_mode = 2
+texture = ExtResource("3_546lt")
 
 [node name="Count" type="Label" parent="InventoryBar/ItemRow/CircuitSlot" unique_id=2121401937]
 layout_mode = 2

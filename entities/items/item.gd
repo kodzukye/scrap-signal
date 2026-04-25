@@ -1,3 +1,4 @@
+class_name Item
 extends Area2D
 
 @export var item_id   : String = "engrenage"

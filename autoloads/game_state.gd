@@ -5,7 +5,7 @@ signal flag_changed(key: String, value: bool)
 
 # Pièces requises par PNJ
 const REPAIR_REQUIREMENTS := {
-	"vrac7": { "engrenage": 1},
+	"vrac7": { "engrenage": 3},
 	"iris3": { "circuit":   1 },
 }
 
