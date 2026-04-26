@@ -15,6 +15,7 @@ var _typing   : bool   = false
 var _finished : bool = false
 
 func _ready() -> void:
+	get_tree().paused = false
 	add_to_group("dialogue_box")
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()

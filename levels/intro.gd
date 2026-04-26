@@ -42,6 +42,8 @@ func _play_sequence() -> void:
 	var tween := create_tween()
 	tween.tween_property(background, "modulate:a", 0.0, 1.2)
 	await tween.finished
+	if OS.get_name() == "Web":
+		JavaScriptBridge.eval("document.querySelector('canvas').focus()")
 	get_tree().change_scene_to_file("res://levels/entrepot/entrepot.tscn")
 
 func _type_line(line: String) -> void:
