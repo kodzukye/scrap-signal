@@ -17,7 +17,7 @@ const CREDITS: Array[String] = [
 	"",
 	"",
 	"TOOLS",
-	"Godot 4.6  •  Aseprite  •  Bandlab  •  Pixel Studio",
+	"Godot 4.6  -  Aseprite  -  Bandlab  -  Pixel Studio",
 	"",
 	"",
 	"Thank you for playing.",

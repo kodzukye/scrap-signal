@@ -20,3 +20,5 @@ func _update_state(is_open: bool) -> void:
 
 	collision.disabled = is_open
 	sprite.texture = open_sprite if is_open else locked_sprite
+	if sprite.texture == open_sprite:
+		AudioManager.play_sfx("door_unlock")

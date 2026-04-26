@@ -39,6 +39,7 @@ func interact() -> void:
 	if not dialogue_box:
 		return
 
+	AudioManager.play_sfx("interact")
 	# Déjà réparé
 	if GameState.get_flag("scrap09_repaired"):
 		return

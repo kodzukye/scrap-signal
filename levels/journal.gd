@@ -26,6 +26,7 @@ func interact() -> void:
 	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
 	print("dialogue_box trouvé : ", dialogue_box)
 	
+	AudioManager.play_sfx("interact")
 	if dialogue_box:
 		print("Lancement dialogue avec : ", DIALOGUE)
 		dialogue_box.start(DIALOGUE)

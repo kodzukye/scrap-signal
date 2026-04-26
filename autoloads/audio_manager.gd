@@ -12,13 +12,10 @@ const AMBIANCES := {
 }
 
 const SFX := {
-	"footstep":       preload("res://assets/audio/sfx/footsteps.ogg"),
 	"item_pickup":    preload("res://assets/audio/sfx/item_pickup.ogg"),
-	"interact":       preload("res://assets/audio/sfx/iteract.ogg"),
+	"interact":       preload("res://assets/audio/sfx/interact.ogg"),
 	"door_unlock":    preload("res://assets/audio/sfx/door_unlocking.ogg"),
 	"repair_success": preload("res://assets/audio/sfx/succesful_repair.ogg"),
-	"vrac_talking":   preload("res://assets/audio/sfx/vrac_talking.ogg"),
-	"iris_talking":   preload("res://assets/audio/sfx/iris_talking.ogg"),
 }
 
 func _ready() -> void:

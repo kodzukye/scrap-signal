@@ -169,7 +169,7 @@ func _refresh_grid() -> void:
 				if cell in paths[i]:
 					var c := _color_for_path(i)
 					var is_endpoint := (col == 0 or col == 3)
-					btn.text = "●" if is_endpoint else "■"
+					btn.text = "O" if is_endpoint else "+"
 					btn.modulate = Color.WHITE
 					btn.add_theme_stylebox_override("normal", _make_stylebox(c, 0.5))
 					btn.add_theme_color_override("font_color", c)
@@ -184,11 +184,10 @@ func _refresh_grid() -> void:
 				var ei = _entry_for_row(row)
 				var xi = _exit_for_row(row)
 				if col == 0 and ei >= 0:
-					btn.text = "●"
+					btn.text = "O"
 					btn.add_theme_color_override("font_color", _color_for_path(ei))
 				elif col == 3 and xi >= 0:
-					btn.text = "●"
-					btn.add_theme_color_override("font_color", _color_for_path(xi))
+					btn.text = "O"
 
 func _update_status() -> void:
 	var count := solved_paths.count(true)

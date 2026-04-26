@@ -53,6 +53,6 @@ fit_content = true
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 6
-text = "▼"
+text = "v"
 horizontal_alignment = 2
 vertical_alignment = 2

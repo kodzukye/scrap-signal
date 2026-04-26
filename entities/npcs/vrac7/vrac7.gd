@@ -68,6 +68,7 @@ func interact() -> void:
 	if not dialogue_box:
 		return
 
+	AudioManager.play_sfx("interact")
 	# État 1 — Déjà réparé, joueur revient après avoir visité l'atelier
 	if GameState.get_flag("vrac7_repaired") and GameState.get_flag("visited_atelier"):
 		dialogue_box.start(DIALOGUE_AFTER_ATELIER)
@@ -91,6 +92,7 @@ func interact() -> void:
 		return
 
 	# État 5 — Revient sans les items
+	
 	dialogue_box.start(DIALOGUE_MISSING_ITEMS)
 
 # ── Mini-jeu ──────────────────────────────────────────────────────────────────

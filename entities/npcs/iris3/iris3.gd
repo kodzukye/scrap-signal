@@ -53,7 +53,8 @@ func interact() -> void:
 	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
 	if not dialogue_box:
 		return
-
+		
+	AudioManager.play_sfx("interact")
 	if GameState.get_flag("iris3_repaired"):
 		dialogue_box.start(DIALOGUE_AFTER_REPAIR)
 		return
@@ -63,7 +64,7 @@ func interact() -> void:
 		GameState.set_flag("iris3_met", true)
 		dialogue_box.start(dlg)
 		return
-
+	
 	dialogue_box.start(DIALOGUE_HAS_ITEM)
 	dialogue_box.dialogue_finished.connect(_start_minigame, CONNECT_ONE_SHOT)
 
@@ -154,7 +155,7 @@ func _show_choice() -> void:
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	vbox.add_child(hbox)
 
-	var btn_partir := _make_button("Leave →", Color("#F0C87A"))
+	var btn_partir := _make_button("Leave ->", Color("#F0C87A"))
 	var btn_rester := _make_button("Stay", Color("#7BD4C4"))
 	hbox.add_child(btn_partir)
 	hbox.add_child(btn_rester)
