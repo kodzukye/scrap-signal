@@ -1,6 +1,7 @@
 extends Node2D
 
 func _ready() -> void:
+	AudioManager.play_ambiance("entrepot")
 	await get_tree().process_frame
 	for zone in get_tree().get_nodes_in_group("repair_zones"):
 		if zone is RepairZone:

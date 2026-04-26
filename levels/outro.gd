@@ -3,18 +3,24 @@ extends Control
 # Textes selon les endings — tirés du GDD
 const ENDING_A: Array[String] = [
 	"SCRAP-09 s'arrête devant la sortie.",
-	"Il hésite.",
-	"Puis il avance.",
 	"",
-	"Sans savoir encore où il va.",
+	"Il pense à VRAC-7. À IRIS-3.",
+	"À 847 jours de silence.",
+	"",
+	"Il franchit le seuil.",
+	"",
+	"Direction : inconnue.",
 ]
 
 const ENDING_B: Array[String] = [
 	"SCRAP-09 s'arrête devant la sortie.",
-	"Il se retourne.",
-	"VRAC-7. IRIS-3. L'usine.",
 	"",
-	"Il décide de rester.",
+	"Il se retourne.",
+	"",
+	"VRAC-7. IRIS-3. L'usine.",
+	"Tout est encore là.",
+	"",
+	"Il reste.",
 ]
 
 const LOG_A := "Destination non définie. Navigation autonome activée."
@@ -33,6 +39,7 @@ var _blink_tween : Tween
 
 func _ready() -> void:
 	var is_ending_b := GameState.get_flag("iris3_repaired")
+	print("Outro chargé — iris3_repaired: ", is_ending_b, " → Ending ", "B" if is_ending_b else "A")
 	_lines = ENDING_B if is_ending_b else ENDING_A
 	log_label.text = LOG_B if is_ending_b else LOG_A
 	log_label.visible = false

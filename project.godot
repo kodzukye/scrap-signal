@@ -20,7 +20,7 @@ config/icon="uid://b0j6vi8mnfcuu"
 [autoload]
 
 GameState="*uid://dj5xpo55gtvr7"
-AudioManager="uid://dsilww05kuakm"
+AudioManager="*uid://dsilww05kuakm"
 SceneManager="uid://cqmks3a5dsxuy"
 
 [display]

@@ -6,6 +6,7 @@ extends Control
 var _can_start := false
 
 func _ready() -> void:
+	AudioManager.stop_ambiance() 
 	modulate.a = 1.0
 	fade_rect.color = Color(0, 0, 0, 1)
 	fade_rect.modulate = Color(1, 1, 1, 1)

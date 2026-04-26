@@ -1,12 +1,13 @@
 [gd_scene format=4 uid="uid://cf5xm3p02u8w0"]
 
+[ext_resource type="Script" uid="uid://rxwk3r6ricg" path="res://levels/cour/cour.gd" id="1_7if1v"]
 [ext_resource type="PackedScene" uid="uid://o7qrmpywwhu8" path="res://ui/hud.tscn" id="1_w6px7"]
 [ext_resource type="PackedScene" uid="uid://jrjxu1xfx0ud" path="res://ui/dialogue_box.tscn" id="2_prv2q"]
 [ext_resource type="Texture2D" uid="uid://dro4of31ou87w" path="res://assets/tilesets/cour.png" id="3_prv2q"]
 [ext_resource type="PackedScene" uid="uid://mh3msmluve7p" path="res://entities/player/player.tscn" id="3_rwjhc"]
 [ext_resource type="Texture2D" uid="uid://bbr6t3088svah" path="res://assets/tilesets/entrepot-tilesets.png" id="4_rwjhc"]
 [ext_resource type="PackedScene" uid="uid://chf0lqpruh4ng" path="res://entities/items/circuit/circuit.tscn" id="5_o70l4"]
-[ext_resource type="PackedScene" uid="uid://1x65ioo8tdro" path="res://entities/items/pushable box/pushable_box.tscn" id="6_7if1v"]
+[ext_resource type="PackedScene" uid="uid://dtgu8bwb2urkj" path="res://entities/npcs/iris3/iris3.tscn" id="7_7if1v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rwjhc"]
 texture = ExtResource("3_prv2q")
@@ -66,6 +67,7 @@ sources/1 = SubResource("TileSetAtlasSource_rwjhc")
 sources/3 = SubResource("TileSetAtlasSource_050cn")
 
 [node name="Cour" type="Node2D" unique_id=868441179]
+script = ExtResource("1_7if1v")
 
 [node name="HUD" parent="." unique_id=1746360319 instance=ExtResource("1_w6px7")]
 
@@ -93,21 +95,15 @@ tile_set = SubResource("TileSet_050cn")
 tile_map_data = PackedByteArray("AAAUACUAAwADAAIAAAA=")
 tile_set = SubResource("TileSet_050cn")
 
-[node name="Object" type="TileMapLayer" parent="Map" unique_id=676176191]
-tile_map_data = PackedByteArray("AAASABIAAwAEAAIAAAAWABIAAwAEAAIAAAA=")
-tile_set = SubResource("TileSet_050cn")
-
-[node name="Area2D" parent="Map" unique_id=642630034 instance=ExtResource("5_o70l4")]
-position = Vector2(328, 294)
-collision_layer = 16
-collision_mask = 2
-
-[node name="Pushable" type="Node2D" parent="Map" unique_id=1984092633]
-
-[node name="PushableBox" parent="Map/Pushable" unique_id=418482729 instance=ExtResource("6_7if1v")]
+[node name="Iris3" parent="Map" unique_id=1189301001 instance=ExtResource("7_7if1v")]
 z_index = 1
-position = Vector2(328, 327)
+position = Vector2(41, 276)
 
 [node name="Player" parent="." unique_id=1424887591 instance=ExtResource("3_rwjhc")]
 z_index = 2
 position = Vector2(329, 554)
+
+[node name="Area2D" parent="." unique_id=642630034 instance=ExtResource("5_o70l4")]
+z_index = 1
+position = Vector2(327, 294)
+collision_layer = 17

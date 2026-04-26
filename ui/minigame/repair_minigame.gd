@@ -89,12 +89,12 @@ func _build_grid() -> void:
 			if col == 0:
 				var path_idx = _entry_for_row(row)
 				if path_idx >= 0:
-					btn.text = "●"
+					btn.text = "0"
 					btn.modulate = _color_for_path(path_idx)
 			elif col == 3:
 				var path_idx = _exit_for_row(row)
 				if path_idx >= 0:
-					btn.text = "●"
+					btn.text = "X"
 					btn.modulate = _color_for_path(path_idx)
 
 			btn.pressed.connect(_on_cell_pressed.bind(row, col))
