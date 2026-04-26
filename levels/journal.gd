@@ -1,12 +1,12 @@
 class_name Journal
 extends Area2D
 
-@export var prompt_text: String = "[E] Lire"
+@export var prompt_text: String = "[E] Read"
 @export var journal_id: String = ""
 
 const DIALOGUE: Array[Dictionary] = [
-	{ "name": "JOURNAL D-447", "text": "Les lumières se sont éteintes. Les humains ne sont pas revenus. Nous avons continué." },
-	{ "name": "JOURNAL D-447", "text": "Les unités ont cessé de recevoir les ordres. Elles continuent quand même. C'est comme si elles avaient décidé." },
+	{ "name": "JOURNAL D-447", "text": "The lights went out. The humans didn't come back. We kept going." },
+	{ "name": "JOURNAL D-447", "text": "The units stopped receiving orders. They continue anyway. It's as if they decided." },
 ]
 
 func _ready() -> void:

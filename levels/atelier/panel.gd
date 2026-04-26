@@ -1,13 +1,13 @@
 class_name PanelJournal
 extends Area2D
 
-@export var prompt_text: String = "[E] Lire"
+@export var prompt_text: String = "[E] Read"
 @export var journal_id: String = "D-891"
 
 const DIALOGUE: Array[Dictionary] = [
-	{ "name": "JOURNAL D-891", "text": "Dernier jour. J'ai vérifié les générateurs ils tiendront des années." },
-	{ "name": "JOURNAL D-891", "text": "J'ai laissé les réservoirs de maintenance pleins. Je ne sais pas si c'est légal." },
-	{ "name": "JOURNAL D-891", "text": "Mais ça change quelque chose pour moi.       — Matteo Corda, Directeur" },
+	{ "name": "JOURNAL D-891", "text": "Last day. I checked the generators... they'll hold for years." },
+	{ "name": "JOURNAL D-891", "text": "I left the maintenance tanks full. I don't know if that's even allowed." },
+	{ "name": "JOURNAL D-891", "text": "But it means something to me.  — Matteo Corda, Director" },
 ]
 
 

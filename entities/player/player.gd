@@ -80,7 +80,7 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 	if area.has_method("interact"):
 		interactable = area
 		if hud:
-			hud.show_prompt(area.prompt_text if "prompt_text" in area else "[E] Interagir")
+			hud.show_prompt(area.prompt_text if "prompt_text" in area else "[E] Interact")
 
 func _on_interaction_area_area_exited(area: Area2D) -> void:
 	if area == interactable:

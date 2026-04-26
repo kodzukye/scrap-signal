@@ -5,15 +5,15 @@ signal repair_complete
 
 const PUZZLES := {
 	"vrac7": {
-		"title": "RECONNEXION — SYSTÈME MOTEUR",
+		"title": "RECONNECTION — MOTOR SYSTEM",
 		"connections": [[0, 0], [1, 2], [3, 3]]
 	},
 	"iris3": {
-		"title": "RECALIBRATION — CAPTEUR OPTIQUE",
+		"title": "RECALIBRATION — OPTICAL SENSOR",
 		"connections": [[0, 1], [2, 3]]
 	},
 	"scrap09": { 
-		"title": "AUTO-RÉPARATION — SCRAP-09",
+		"title": "SELF-REPAIR — SCRAP-09",
 		"connections": [[0, 0], [1, 2], [2, 3]]
 	},
 }
@@ -194,10 +194,10 @@ func _update_status() -> void:
 	var count := solved_paths.count(true)
 	var total := solved_paths.size()
 	if count == total:
-		status.text = "✓ RÉPARATION COMPLÈTE"
+		status.text = "REPAIR COMPLETE"
 		status.add_theme_color_override("font_color", Color("#6daa45"))
 	else:
-		status.text = "%d / %d connexions établies" % [count, total]
+		status.text = "%d / %d connections established" % [count, total]
 		status.remove_theme_color_override("font_color")
 
 # ── Helpers ───────────────────────────────────────────────────────────────────

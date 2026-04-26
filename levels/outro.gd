@@ -2,29 +2,29 @@ extends Control
 
 # Textes selon les endings — tirés du GDD
 const ENDING_A: Array[String] = [
-	"SCRAP-09 s'arrête devant la sortie.",
+	"SCRAP-09 stops at the exit.",
 	"",
-	"Il pense à VRAC-7. À IRIS-3.",
-	"À 847 jours de silence.",
+	"It thinks of VRAC-7. Of IRIS-3.",
+	"Of 847 days of silence.",
 	"",
-	"Il franchit le seuil.",
+	"It crosses the threshold.",
 	"",
-	"Direction : inconnue.",
+	"Destination: unknown.",
 ]
 
 const ENDING_B: Array[String] = [
-	"SCRAP-09 s'arrête devant la sortie.",
+	"SCRAP-09 stops at the exit.",
 	"",
-	"Il se retourne.",
+	"It turns back.",
 	"",
-	"VRAC-7. IRIS-3. L'usine.",
-	"Tout est encore là.",
+	"VRAC-7. IRIS-3. The factory.",
+	"Everything is still here.",
 	"",
-	"Il reste.",
+	"It stays.",
 ]
 
-const LOG_A := "Destination non définie. Navigation autonome activée."
-const LOG_B := "Protocole de continuité autonome. Statut : actif."
+const LOG_A := "Destination undefined. Autonomous navigation activated."
+const LOG_B := "Autonomous continuity protocol. Status: active."
 
 @onready var text_label     := $CenterContainer/VBoxContainer/TextLabel
 @onready var log_label      := $CenterContainer/VBoxContainer/LogLabel

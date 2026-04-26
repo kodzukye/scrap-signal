@@ -1,21 +1,21 @@
 class_name RepairStation
 extends Area2D
 
-@export var prompt_text: String = "[E] Se réparer"
+@export var prompt_text: String = "[E] Self-repair"
 
 const REQUIRED_ITEMS := { "circuit": 1 }
 
 const DIALOGUE_NO_ITEM := [
-	{ "name": "SYSTÈME", "text": "Composant requis : circuit de self-repair. Non détecté." },
+	{ "name": "SYSTEM", "text": "Required component: self-repair circuit. Not detected." },
 ]
 
 const DIALOGUE_HAS_ITEM := [
-	{ "name": "SYSTÈME", "text": "Circuit compatible détecté. Lancer la séquence de réparation ?" },
+	{ "name": "SYSTEM", "text": "Compatible circuit detected. Start repair sequence?" },
 ]
 
 const DIALOGUE_DONE := [
-	{ "name": "SYSTÈME", "text": "Réparation complète. Systèmes moteurs restaurés à 94%." },
-	{ "name": "SYSTÈME", "text": "Mémoire fragmentée restaurée. Fragment — jour de fermeture." },
+	{ "name": "SYSTEM", "text": "Repair complete. Motor systems restored to 94%." },
+	{ "name": "SYSTEM", "text": "Fragmented memory restored. Fragment — shutdown day." },
 ]
 
 func _ready() -> void:
@@ -71,9 +71,9 @@ func _on_repair_done() -> void:
 
 	var hud: HUD = get_tree().get_first_node_in_group("hud")
 	if hud:
-		hud.show_log("Auto-diagnostic complet. Systèmes restaurés.")
+		hud.show_log("Self-diagnostic complete. Systems restored.")
 		await get_tree().create_timer(2.5).timeout
-		hud.show_log("Accès cour extérieure déverrouillé.")
+		hud.show_log("Outer courtyard access unlocked.")
 
 	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
 	if dialogue_box:

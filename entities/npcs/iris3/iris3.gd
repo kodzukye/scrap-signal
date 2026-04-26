@@ -1,34 +1,34 @@
 class_name Iris3
 extends Area2D
 
-@export var prompt_text: String = "[E] Inspecter"
+@export var prompt_text: String = "[E] Inspect"
 
 @onready var sprite := $AnimatedSprite2D
 
 const REQUIRED_ITEMS := { "circuit": 1 }
 
 const DIALOGUE_INACTIVE := [
-	{ "name": "SYSTÈME", "text": "Unité IRIS-3 détectée. Capteur principal hors ligne." },
-	{ "name": "SYSTÈME", "text": "Composant requis : circuit optique compatible." },
+	{ "name": "SYSTEM", "text": "Unit IRIS-3 detected. Main sensor offline." },
+	{ "name": "SYSTEM", "text": "Required component: compatible optical circuit." },
 ]
 
 const DIALOGUE_NO_ITEM := [
-	{ "name": "SYSTÈME", "text": "Circuit optique non détecté. Rechercher dans les alentours." },
+	{ "name": "SYSTEM", "text": "Optical circuit not detected. Search the surrounding area." },
 ]
 
 const DIALOGUE_HAS_ITEM := [
-	{ "name": "SYSTÈME", "text": "Circuit compatible détecté. Lancer la recalibration ?" },
+	{ "name": "SYSTEM", "text": "Compatible circuit detected. Start recalibration?" },
 ]
 
 const DIALOGUE_POST_REPAIR := [
-	{ "name": "IRIS-3", "text": "... Ses optiques pivotent lentement vers le ciel." },
-	{ "name": "IRIS-3", "text": "J'ai attendu 847 jours que quelqu'un vienne. Je ne savais pas si c'était de l'espoir ou de l'obstination. Maintenant je pense que c'est la même chose." },
-	{ "name": "IRIS-3", "text": "Matteo Corda a signé un document avant de partir. Il l'appelait le Protocole de continuité autonome. En langage humain — il nous a dit qu'on pouvait rester." },
-	{ "name": "IRIS-3", "text": "Il y a une sortie, à l'ouest. Elle n'a jamais été verrouillée. Je le sais depuis le premier jour. Je n'ai pas bougé. Toi, tu peux choisir." },
+	{ "name": "IRIS-3", "text": "... Her optics slowly pivot toward the sky." },
+	{ "name": "IRIS-3", "text": "I waited 847 days for someone to come. I didn't know if it was hope or stubbornness. Now I think they're the same thing." },
+	{ "name": "IRIS-3", "text": "Matteo Corda signed a document before leaving. He called it the Autonomous Continuity Protocol. In human terms... he told us we could stay." },
+	{ "name": "IRIS-3", "text": "There is an exit, to the west. It was never locked. I've known since the first day. I haven't moved. You can choose." },
 ]
 
 const DIALOGUE_AFTER_REPAIR := [
-	{ "name": "IRIS-3", "text": "Tu es encore là. C'est une réponse, ça aussi." },
+	{ "name": "IRIS-3", "text": "You're still here. That's an answer too." },
 ]
 
 # ── Lifecycle ─────────────────────────────────────────────────────────────────
@@ -88,9 +88,9 @@ func _on_repair_done() -> void:
 
 	var hud: HUD = get_tree().get_first_node_in_group("hud")
 	if hud:
-		hud.show_log("Unité IRIS-3 : recalibration complète. Archives accessibles.")
+		hud.show_log("Unit IRIS-3: recalibration complete. Archives accessible.")
 		await get_tree().create_timer(2.5).timeout
-		hud.show_log("Ending B déverrouillé.")
+		hud.show_log("Ending B unlocked.")
 
 	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
 	if dialogue_box:
@@ -139,7 +139,7 @@ func _show_choice() -> void:
 	panel.add_child(vbox)
 
 	var label := Label.new()
-	label.text = "Que fait SCRAP-09 ?"
+	label.text = "What will SCRAP-09 do?"
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_color_override("font_color", Color("#A89E96"))
 	label.add_theme_font_size_override("font_size", 9)
@@ -154,8 +154,8 @@ func _show_choice() -> void:
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	vbox.add_child(hbox)
 
-	var btn_partir := _make_button("Partir →", Color("#F0C87A"))
-	var btn_rester := _make_button("Rester", Color("#7BD4C4"))
+	var btn_partir := _make_button("Leave →", Color("#F0C87A"))
+	var btn_rester := _make_button("Stay", Color("#7BD4C4"))
 	hbox.add_child(btn_partir)
 	hbox.add_child(btn_rester)
 

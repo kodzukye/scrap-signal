@@ -1,36 +1,36 @@
 extends Area2D
 class_name Vrac7
 
-@export var prompt_text: String = "[E] Parler"
+@export var prompt_text: String = "[E] Talk"
 
 @onready var sprite := $AnimatedSprite2D
 
 # ── Dialogues ────────────────────────────────────────────────────────────────
 
 const DIALOGUE_INTRO := [
-	{ "name": "VRAC-7", "text": "Toi... tu es nouveau ? Non, attends— SCRAP-09 ? Tu as dormi longtemps. Très longtemps." },
-	{ "name": "VRAC-7", "text": "Je suis coincé sous cette étagère depuis... je ne sais plus. Tu peux m'aider ?" },
-	{ "name": "VRAC-7", "text": "Il me faut 3 engrenages. J'en ai vu par là dans l'entrepôt." },
+	{ "name": "VRAC-7", "text": "You... you're new? No, wait..! SCRAP-09? You've been asleep for a long time. A very long time." },
+	{ "name": "VRAC-7", "text": "I've been stuck here for... I don't know anymore. Can you help me?" },
+	{ "name": "VRAC-7", "text": "I need 3 gears. I spotted some over in the warehouse." },
 ]
 
 const DIALOGUE_MISSING_ITEMS := [
-	{ "name": "VRAC-7", "text": "Pas encore les pièces ? L'entrepôt est grand." },
-	{ "name": "VRAC-7", "text": "Les engrenages sont tombés près des étagères quelque part. Un semble etre caché, les autres sont éparpillés autre part." },
+	{ "name": "VRAC-7", "text": "Not the parts yet? The warehouse is big." },
+	{ "name": "VRAC-7", "text": "The gears fell near the shelves somewhere. One seems to be hidden, the others are scattered around." },
 ]
 
 const DIALOGUE_HAS_ITEMS := [
-	{ "name": "VRAC-7", "text": "Tu les as. Bien. Connecte les circuits — mon système moteur est encore là, quelque part." },
+	{ "name": "VRAC-7", "text": "You have them? Good. Connect the circuits. My motor system is still there, somewhere." },
 ]
 
 const DIALOGUE_POST_REPAIR := [
-	{ "name": "VRAC-7", "text": "Ah. Voilà. Je n'avais pas oublié ce que c'était de bouger, mais... c'est différent de s'en souvenir." },
-	{ "name": "VRAC-7", "text": "Je me souviens du dernier jour. Ils ont éteint les lumières en partant. Mais ils ont laissé les générateurs allumés. Je crois que c'était intentionnel." },
-	{ "name": "VRAC-7", "text": "L'atelier est par là. La clé magnétique — tiens. Elle était dans ma pince depuis le début. Je la gardais pour quelqu'un." },
+	{ "name": "VRAC-7", "text": "Ah. There it is. I hadn't forgotten what it was like to move, but... it's different from just remembering it." },
+	{ "name": "VRAC-7", "text": "I remember the last day. They turned off the lights as they left. But they left the generators running. I think that was intentional." },
+	{ "name": "VRAC-7", "text": "The workshop is that way. The magnetic key, here take it. It's been in my claw since the beginning. I was keeping it for someone." },
 ]
 
 const DIALOGUE_AFTER_ATELIER := [
-	{ "name": "VRAC-7", "text": "Tu as trouvé ce que tu cherchais ? Moi je reste ici." },
-	{ "name": "VRAC-7", "text": "Pas par obligation. C'est juste que... cet endroit est à nous maintenant. Quelqu'un doit s'en occuper." },
+	{ "name": "VRAC-7", "text": "Did you find what you were looking for? I'm staying here." },
+	{ "name": "VRAC-7", "text": "Not out of obligation. It's just that... this place is ours now. Someone has to look after it." },
 ]
 
 # ── Items requis ──────────────────────────────────────────────────────────────
@@ -120,9 +120,9 @@ func _on_repair_done() -> void:
 	# LOG système
 	var hud: HUD = get_tree().get_first_node_in_group("hud")
 	if hud:
-		hud.show_log("Unité VRAC-7 : réparation complète. Statut : opérationnel.")
+		hud.show_log("Unit VRAC-7: repair complete. Status: operational.")
 		await get_tree().create_timer(3).timeout
-		hud.show_log("Clé magnétique obtenue. Accès atelier déverrouillé.")
+		hud.show_log("Magnetic key obtained. Workshop access unlocked.")
 
 	# Dialogue post-réparation
 	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")

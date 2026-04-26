@@ -5,22 +5,22 @@ const SCROLL_SPEED := 20.0
 const CREDITS: Array[String] = [
 	"SCRAP SINGAL",
 	"",
-	"Un jeu réalisé pour la Gamedev.js Jam 2026",
+	"A game made for the Gamedev.js Jam 2026",
 	"",
 	"",
-	"DÉVELOPPEMENT",
+	"DEVELOPMENT",
 	"kodzukye",
 	"",
 	"",
-	"MUSIQUES D'AMBIANCE",
+	"AMBIENT MUSIC",
 	"MAC Senjah",
 	"",
 	"",
-	"OUTILS",
+	"TOOLS",
 	"Godot 4.6  •  Aseprite  •  Bandlab  •  Pixel Studio",
 	"",
 	"",
-	"Merci d'avoir joué.",
+	"Thank you for playing.",
 ]
 
 @onready var scroll      := $ScrollContainer
