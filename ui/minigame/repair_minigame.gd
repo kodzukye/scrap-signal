@@ -6,147 +6,152 @@ signal repair_complete
 const PUZZLES := {
 	"vrac7": {
 		"title": "RECONNECTION — MOTOR SYSTEM",
-		"connections": [[0, 0], [1, 2], [3, 3]]
+		"colors": [Color("#f4c430"), Color("#5bc8f5"), Color("#f47c3c")]
 	},
 	"iris3": {
 		"title": "RECALIBRATION — OPTICAL SENSOR",
-		"connections": [[0, 1], [2, 3]]
+		"colors": [Color("#f4c430"), Color("#5bc8f5")]
 	},
-	"scrap09": { 
+	"scrap09": {
 		"title": "SELF-REPAIR — SCRAP-09",
-		"connections": [[0, 0], [1, 2], [2, 3]]
+		"colors": [Color("#f4c430"), Color("#5bc8f5"), Color("#f47c3c")]
 	},
 }
 
-const GRID_SIZE := 4
+const DOT_RADIUS := 8.0
+const WIRE_WIDTH := 4.0
 
-var current_puzzle: Dictionary
-var paths: Array = []
-var active_path: int = -1
-var solved_paths: Array = []
+var current_puzzle : Dictionary
+var right_order    : Array = []
+var connections    : Dictionary = {}
+var dragging       : int = -1
+var drag_pos       : Vector2
 
-@onready var grid      := $Background/Panel/VBoxContainer/Grid
-@onready var title_lbl := $Background/Panel/VBoxContainer/Title
-@onready var status    := $Background/Panel/VBoxContainer/StatusLabel
+@onready var wire_canvas : Control = $Background/Panel/VBoxContainer/WireCanvas
+@onready var title_lbl   : Label   = $Background/Panel/VBoxContainer/Title
+@onready var status      : Label   = $Background/Panel/VBoxContainer/StatusLabel
 
-# ── Lifecycle ─────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
+	var vbox = $Background/Panel/VBoxContainer
 	layer = 1000
-
-	var panel := $Background/Panel
-	panel.set_anchors_preset(Control.PRESET_CENTER)
-
-	var vbox := $Background/Panel/VBoxContainer
-	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	vbox.add_theme_constant_override("separation", 12)
-
-	# Centre la grid horizontalement dans le VBox
-	grid.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	grid.size_flags_vertical   = Control.SIZE_SHRINK_CENTER
+	wire_canvas.custom_minimum_size  = Vector2(320, 120)
+	wire_canvas.size_flags_vertical   = Control.SIZE_SHRINK_CENTER
+	vbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		_cancel()
 
-# ── API publique ──────────────────────────────────────────────────────────────
-
 func open(robot_id: String) -> void:
-	current_puzzle = PUZZLES[robot_id]
-	title_lbl.text = current_puzzle["title"]
-	paths.clear()
-	solved_paths.clear()
-	for _c in current_puzzle["connections"]:
-		paths.append([])
-		solved_paths.append(false)
+	current_puzzle = PUZZLES.get(robot_id, {})
+	if current_puzzle.is_empty():
+		return
+	title_lbl.text = current_puzzle["title"] as String
+	connections.clear()
+	dragging = -1
+
+	var n: int = (current_puzzle["colors"] as Array).size()  # ← FIX ligne 49
+	right_order = range(n)
+	right_order.shuffle()
+
 	_set_hud_visible(false)
 	_set_player_enabled(false)
-	_build_grid()
 	_update_status()
+	wire_canvas.queue_redraw()
 	show()
 
-# ── Grille ────────────────────────────────────────────────────────────────────
+# ── Drawing ────────────────────────────────────────────────────────────────────
 
-func _build_grid() -> void:
-	for child in grid.get_children():
-		child.queue_free()
-
-	# Taille fixe de la grille : GRID_SIZE * taille bouton + séparation
-	var cell_size := 25
-	var separation := 4
-	var grid_px := GRID_SIZE * cell_size + (GRID_SIZE - 1) * separation
-	grid.custom_minimum_size = Vector2(grid_px, grid_px)
-	grid.columns = GRID_SIZE
-
-	for row in GRID_SIZE:
-		for col in GRID_SIZE:
-			var btn := Button.new()
-			btn.custom_minimum_size = Vector2(cell_size, cell_size)
-			btn.name = "Cell_%d_%d" % [row, col]
-			btn.add_theme_stylebox_override("normal", _make_stylebox(Color(0.15, 0.15, 0.15), 1.0))
-			btn.add_theme_stylebox_override("hover",  _make_stylebox(Color(0.25, 0.25, 0.25), 1.0))
-
-			if col == 0:
-				var path_idx = _entry_for_row(row)
-				if path_idx >= 0:
-					btn.text = "0"
-					btn.modulate = _color_for_path(path_idx)
-			elif col == 3:
-				var path_idx = _exit_for_row(row)
-				if path_idx >= 0:
-					btn.text = "X"
-					btn.modulate = _color_for_path(path_idx)
-
-			btn.pressed.connect(_on_cell_pressed.bind(row, col))
-			grid.add_child(btn)
-
-func _on_cell_pressed(row: int, col: int) -> void:
-	var entry_idx = _entry_for_row(row)
-	if col == 0 and entry_idx >= 0:
-		active_path = entry_idx
-		paths[active_path] = [Vector2i(row, col)]
-		_refresh_grid()
+func draw_wires(canvas: Control) -> void:
+	if current_puzzle.is_empty():
 		return
+	var colors := current_puzzle["colors"] as Array
+	var n: int = colors.size()
+	var w := canvas.size.x
+	var h := canvas.size.y
 
-	if active_path < 0:
+	canvas.draw_line(Vector2(w * 0.5, 10), Vector2(w * 0.5, h - 10),
+		Color(1, 1, 1, 0.08), 1.0)
+
+	for left_idx in connections:
+		var right_slot: int = connections[left_idx]
+		var from := _left_pos(left_idx, n, w, h)
+		var to   := _right_pos(right_slot, n, w, h)
+		canvas.draw_line(from, to, colors[left_idx], WIRE_WIDTH, true)
+
+	if dragging >= 0:
+		var from := _left_pos(dragging, n, w, h)
+		canvas.draw_line(from, drag_pos, (colors[dragging] as Color).lightened(0.3), WIRE_WIDTH, true)
+
+	for i in n:
+		var pos := _left_pos(i, n, w, h)
+		var c   := colors[i] as Color
+		canvas.draw_circle(pos, DOT_RADIUS, c)
+		if not connections.has(i):
+			canvas.draw_arc(pos, DOT_RADIUS + 4, 0, TAU, 32, c.lightened(0.5), 2.0)
+
+	for i in n:
+		var pos     := _right_pos(i, n, w, h)
+		var col_idx : int = right_order[i]
+		var c       := colors[col_idx] as Color
+		canvas.draw_circle(pos, DOT_RADIUS, c)
+		if not connections.values().has(i):
+			canvas.draw_arc(pos, DOT_RADIUS + 4, 0, TAU, 32, c.lightened(0.5), 2.0)
+
+# ── Input ─────────────────────────────────────────────────────────────────────
+
+func on_canvas_input(event: InputEvent) -> void:
+	if current_puzzle.is_empty():
 		return
+	var colors := current_puzzle["colors"] as Array
+	var n: int = colors.size()
+	var w := wire_canvas.size.x
+	var h := wire_canvas.size.y
 
-	var last: Vector2i = paths[active_path].back() if paths[active_path].size() > 0 else Vector2i(-1, -1)
-	var cell := Vector2i(row, col)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			for i in n:
+				if event.position.distance_to(_left_pos(i, n, w, h)) <= DOT_RADIUS + 6.0:
+					connections.erase(i)
+					dragging = i
+					drag_pos = event.position
+					_update_status()
+					wire_canvas.queue_redraw()
+					return
+		else:
+			if dragging >= 0:
+				for i in n:
+					if connections.values().has(i):
+						continue
+					if event.position.distance_to(_right_pos(i, n, w, h)) <= DOT_RADIUS + 6.0:
+						if right_order[i] == dragging:
+							connections[dragging] = i
+							_update_status()
+							_check_win()
+				dragging = -1
+				wire_canvas.queue_redraw()
 
-	if not _is_adjacent(last, cell):
-		return
+	elif event is InputEventMouseMotion and dragging >= 0:
+		drag_pos = event.position
+		wire_canvas.queue_redraw()
 
-	for i in paths.size():
-		if i == active_path:
-			continue
-		if cell in paths[i]:
-			return
+# ── Helpers ───────────────────────────────────────────────────────────────────
 
-	paths[active_path].append(cell)
+func _left_pos(i: int, n: int, w: float, h: float) -> Vector2:
+	return Vector2(DOT_RADIUS + 20.0, h / (n + 1) * (i + 1))
 
-	var exit_row = current_puzzle["connections"][active_path][1]
-	if col == 3 and row == exit_row:
-		solved_paths[active_path] = true
-		active_path = -1
-		_refresh_grid()
-		_update_status()
-		_check_win()
-		return
-
-	_refresh_grid()
-	_update_status()
-
-# ── Victoire / Annulation ─────────────────────────────────────────────────────
+func _right_pos(i: int, n: int, w: float, h: float) -> Vector2:
+	return Vector2(w - DOT_RADIUS - 20.0, h / (n + 1) * (i + 1))
 
 func _check_win() -> void:
-	if solved_paths.all(func(s): return s == true):
+	if connections.size() == (current_puzzle["colors"] as Array).size():
 		await get_tree().create_timer(0.6).timeout
 		repair_complete.emit()
 		_close()
 
 func _cancel() -> void:
-	active_path = -1
+	dragging = -1
 	_close()
 
 func _close() -> void:
@@ -154,89 +159,23 @@ func _close() -> void:
 	_set_player_enabled(true)
 	hide()
 
-# ── Affichage ─────────────────────────────────────────────────────────────────
-
-func _refresh_grid() -> void:
-	for row in GRID_SIZE:
-		for col in GRID_SIZE:
-			var btn: Button = grid.get_node_or_null("Cell_%d_%d" % [row, col])
-			if btn == null:
-				continue
-			var cell := Vector2i(row, col)
-			var found := false
-
-			for i in paths.size():
-				if cell in paths[i]:
-					var c := _color_for_path(i)
-					var is_endpoint := (col == 0 or col == 3)
-					btn.text = "O" if is_endpoint else "+"
-					btn.modulate = Color.WHITE
-					btn.add_theme_stylebox_override("normal", _make_stylebox(c, 0.5))
-					btn.add_theme_color_override("font_color", c)
-					found = true
-					break
-
-			if not found:
-				btn.modulate = Color.WHITE
-				btn.text = ""
-				btn.add_theme_stylebox_override("normal", _make_stylebox(Color(0.15, 0.15, 0.15), 1.0))
-				btn.remove_theme_color_override("font_color")
-				var ei = _entry_for_row(row)
-				var xi = _exit_for_row(row)
-				if col == 0 and ei >= 0:
-					btn.text = "O"
-					btn.add_theme_color_override("font_color", _color_for_path(ei))
-				elif col == 3 and xi >= 0:
-					btn.text = "O"
-
 func _update_status() -> void:
-	var count := solved_paths.count(true)
-	var total := solved_paths.size()
-	if count == total:
+	var total: int = (current_puzzle.get("colors", []) as Array).size()
+	var done  := connections.size()
+	if done == total:
 		status.text = "REPAIR COMPLETE"
 		status.add_theme_color_override("font_color", Color("#6daa45"))
 	else:
-		status.text = "%d / %d connections established" % [count, total]
+		status.text = "%d / %d connections established" % [done, total]
 		status.remove_theme_color_override("font_color")
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
-
-func _set_hud_visible(visible: bool) -> void:
+func _set_hud_visible(v: bool) -> void:
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud:
-		hud.visible = visible
-
-func _make_stylebox(color: Color, alpha: float) -> StyleBoxFlat:
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(color.r, color.g, color.b, alpha)
-	sb.corner_radius_top_left    = 4
-	sb.corner_radius_top_right   = 4
-	sb.corner_radius_bottom_left = 4
-	sb.corner_radius_bottom_right = 4
-	return sb
-
-func _entry_for_row(row: int) -> int:
-	for i in current_puzzle["connections"].size():
-		if current_puzzle["connections"][i][0] == row:
-			return i
-	return -1
-
-func _exit_for_row(row: int) -> int:
-	for i in current_puzzle["connections"].size():
-		if current_puzzle["connections"][i][1] == row:
-			return i
-	return -1
-
-func _is_adjacent(a: Vector2i, b: Vector2i) -> bool:
-	return abs(a.x - b.x) + abs(a.y - b.y) == 1
-
-func _color_for_path(idx: int) -> Color:
-	var colors := [Color("#f4c430"), Color("#5bc8f5"), Color("#f47c3c")]
-	return colors[idx % colors.size()]
+		hud.visible = v
 
 func _set_player_enabled(enabled: bool) -> void:
 	var player = get_tree().get_first_node_in_group("player")
-	print("_set_player_enabled: ", enabled, " | player trouvé: ", player)
 	if player:
 		player.set_process(enabled)
 		player.set_physics_process(enabled)

@@ -4,6 +4,7 @@ var music_player : AudioStreamPlayer
 var sfx_player   : AudioStreamPlayer
 
 const AMBIANCE_VOLUME_DB := -12.0 
+const SFX_VOLUME_DB      := -8.0
 
 const AMBIANCES := {
 	"entrepot": preload("res://assets/audio/music/entrepot.ogg"),
@@ -31,6 +32,7 @@ func _ready() -> void:
 	sfx_player = AudioStreamPlayer.new()
 	sfx_player.name = "SfxPlayer"
 	sfx_player.bus = "SFX"
+	sfx_player.volume_db = SFX_VOLUME_DB
 	add_child(sfx_player)
 	sfx_player.process_mode = Node.PROCESS_MODE_ALWAYS
 

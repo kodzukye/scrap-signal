@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED := 120
+const SPEED := 64
 const TILE_SIZE := 16
 
 @onready var sprite := $AnimatedSprite2D
