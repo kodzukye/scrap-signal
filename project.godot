@@ -15,7 +15,7 @@ run/main_scene="uid://do1aqgu8ljdju"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://icon.svg"
+config/icon="uid://b0j6vi8mnfcuu"
 
 [autoload]
 
