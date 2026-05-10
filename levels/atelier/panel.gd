@@ -16,21 +16,17 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 
 func interact() -> void:
-	print("Journal interact() appelé")
-	
-	var hud := get_tree().get_first_node_in_group("hud")
+	var hud: HUD = get_tree().get_first_node_in_group("hud")
 	if hud:
 		hud.hide_prompt()
 	
 	if journal_id != "":
 		GameState.set_flag(journal_id + "_read", true)
 	
-	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
-	print("dialogue_box trouvé : ", dialogue_box)
+	var dialogue_box: DialogueBox = get_tree().get_first_node_in_group("dialogue_box")
 	
 	AudioManager.play_sfx("interact")
 	if dialogue_box:
-		print("Lancement dialogue avec : ", DIALOGUE)
 		dialogue_box.start(DIALOGUE)
 
 func _on_body_entered(body: Node) -> void:

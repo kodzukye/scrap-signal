@@ -1,20 +1,20 @@
 extends Node
 
-signal inventory_changed
+signal inventory_changed()
 signal flag_changed(key: String, value: bool)
 
 # Pièces requises par PNJ
-const REPAIR_REQUIREMENTS := {
+const REPAIR_REQUIREMENTS: Dictionary = {
 	"vrac7": { "engrenage": 3},
 	"iris3": { "circuit":   1 },
 }
 
-var repaired := {
+var repaired: Dictionary = {
 	"vrac7": false,
 	"iris3": false,
 }
-var inventory := {}
-var flags := {}
+var inventory: Dictionary = {}
+var flags: Dictionary = {}
 
 func get_flag(key: String) -> bool:
 	return flags.get(key, false)
@@ -31,7 +31,6 @@ func add_item(id: String, amount: int = 1) -> void:
 	else:
 		inventory[id] = 1
 		inventory_changed.emit()
-	print("Inventaire : ", inventory)
 
 func has_item(id: String) -> bool:
 	return inventory.get(id, 0) > 0
@@ -47,7 +46,7 @@ func remove_item(item_id: String, amount: int) -> void:
 func can_repair(npc_id: String) -> bool:
 	if repaired.get(npc_id, false):
 		return false  # déjà réparé
-	var required = REPAIR_REQUIREMENTS.get(npc_id, {})
+	var required: Dictionary = REPAIR_REQUIREMENTS.get(npc_id, {})
 	for item_id in required:
 		if inventory.get(item_id, 0) < required[item_id]:
 			return false
@@ -57,8 +56,7 @@ func complete_repair(npc_id: String) -> void:
 	if not can_repair(npc_id):
 		return
 	# Consomme les pièces
-	var required = REPAIR_REQUIREMENTS[npc_id]
+	var required: Dictionary = REPAIR_REQUIREMENTS[npc_id]
 	for item_id in required:
 		remove_item(item_id, required[item_id])
 	repaired[npc_id] = true
-	print("Réparation terminée : ", npc_id)

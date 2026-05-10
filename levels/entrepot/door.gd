@@ -5,8 +5,8 @@ extends StaticBody2D
 @export var locked_sprite: Texture2D
 @export var open_sprite: Texture2D
 
-@onready var sprite := $Sprite2D
-@onready var collision := $CollisionShape2D
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
 	GameState.flag_changed.connect(_on_flag_changed)

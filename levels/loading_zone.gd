@@ -6,14 +6,13 @@ extends Area2D
 
 @onready var fade_rect: ColorRect = $TransitionLayer/FadeRect
 
-var _transitioning := false
+var _transitioning: bool = false
 
 func _ready() -> void:
 	fade_rect.modulate.a = 0.0
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:
-	print("Body entered")
 	if _transitioning:
 		return
 	if body.is_in_group("player"):
@@ -21,7 +20,7 @@ func _on_body_entered(body: Node2D) -> void:
 		_start_transition()
 
 func _start_transition() -> void:
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(fade_rect, "modulate:a", 1.0, fade_duration)
 	tween.tween_callback(func():
 		get_tree().change_scene_to_file(target_scene)

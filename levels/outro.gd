@@ -23,23 +23,22 @@ const ENDING_B: Array[String] = [
 	"It stays.",
 ]
 
-const LOG_A := "Destination undefined. Autonomous navigation activated."
-const LOG_B := "Autonomous continuity protocol. Status: active."
-
-@onready var text_label     := $CenterContainer/VBoxContainer/TextLabel
-@onready var log_label      := $CenterContainer/VBoxContainer/LogLabel
-@onready var fade_rect      := $FadeRect
-@onready var continue_label := $ContinueLabel
+const LOG_A: String = "Destination undefined. Autonomous navigation activated."
+const LOG_B: String = "Autonomous continuity protocol. Status: active."
 
 var _lines: Array[String] = []
-var _current_line := 0
-var _can_continue := false
-var _finished := false
+var _current_line: int = 0
+var _can_continue: bool = false
+var _finished: bool = false
 var _blink_tween : Tween
 
+@onready var text_label: Label = $CenterContainer/VBoxContainer/TextLabel
+@onready var log_label: Label = $CenterContainer/VBoxContainer/LogLabel
+@onready var fade_rect: ColorRect = $FadeRect
+@onready var continue_label: Label = $ContinueLabel
+
 func _ready() -> void:
-	var is_ending_b := GameState.get_flag("iris3_repaired")
-	print("Outro chargé — iris3_repaired: ", is_ending_b, " → Ending ", "B" if is_ending_b else "A")
+	var is_ending_b: bool = GameState.get_flag("iris3_repaired")
 	_lines = ENDING_B if is_ending_b else ENDING_A
 	log_label.text = LOG_B if is_ending_b else LOG_A
 	log_label.visible = false
@@ -47,7 +46,7 @@ func _ready() -> void:
 	text_label.text = ""
 
 	fade_rect.modulate.a = 1.0
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(fade_rect, "modulate:a", 0.0, 1.2)
 	tween.tween_callback(_show_next_line)
 
@@ -59,7 +58,7 @@ func _show_next_line() -> void:
 	_can_continue = false
 	_hide_continue()
 
-	var line := _lines[_current_line]
+	var line: String = _lines[_current_line]
 	_current_line += 1
 	text_label.text = ""
 
@@ -69,7 +68,7 @@ func _show_next_line() -> void:
 		_show_continue()
 		return
 
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	for i in line.length():
 		tween.tween_callback(func(): text_label.text += line[text_label.text.length()])
 		tween.tween_interval(0.04)
@@ -85,7 +84,7 @@ func _show_log() -> void:
 	await get_tree().create_timer(0.8).timeout
 	log_label.visible = true
 	log_label.modulate.a = 0.0
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(log_label, "modulate:a", 1.0, 0.8)
 	tween.tween_interval(2.0)
 	tween.tween_callback(_show_credits)
@@ -128,7 +127,7 @@ func _next() -> void:
 
 func _go_to_menu() -> void:
 	_can_continue = false
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(fade_rect, "modulate:a", 1.0, 1.0)
 	tween.tween_callback(func():
 		get_tree().change_scene_to_file("res://levels/credits.tscn")

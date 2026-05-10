@@ -3,17 +3,17 @@ extends Area2D
 
 @export var prompt_text: String = "[E] Self-repair"
 
-const REQUIRED_ITEMS := { "circuit": 1 }
+const REQUIRED_ITEMS: Dictionary = { "circuit": 1 }
 
-const DIALOGUE_NO_ITEM := [
+const DIALOGUE_NO_ITEM: Array[Dictionary] = [
 	{ "name": "SYSTEM", "text": "Required component: self-repair circuit. Not detected." },
 ]
 
-const DIALOGUE_HAS_ITEM := [
+const DIALOGUE_HAS_ITEM: Array[Dictionary] = [
 	{ "name": "SYSTEM", "text": "Compatible circuit detected. Start repair sequence?" },
 ]
 
-const DIALOGUE_DONE := [
+const DIALOGUE_DONE: Array[Dictionary] = [
 	{ "name": "SYSTEM", "text": "Repair complete. Motor systems restored to 94%." },
 	{ "name": "SYSTEM", "text": "Fragmented memory restored. Fragment — shutdown day." },
 ]
@@ -35,7 +35,7 @@ func interact() -> void:
 	if hud:
 		hud.hide_prompt()
 
-	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
+	var dialogue_box: DialogueBox = get_tree().get_first_node_in_group("dialogue_box")
 	if not dialogue_box:
 		return
 
@@ -54,13 +54,13 @@ func interact() -> void:
 	dialogue_box.dialogue_finished.connect(_start_minigame, CONNECT_ONE_SHOT)
 
 func _start_minigame() -> void:
-	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
+	var dialogue_box: DialogueBox = get_tree().get_first_node_in_group("dialogue_box")
 	if dialogue_box:
 		dialogue_box.hide()
 
-	var minigame_node := preload("res://ui/minigame/repair_minigame.tscn").instantiate()
+	var minigame_node: Node = preload("res://ui/minigame/repair_minigame.tscn").instantiate()
 	get_tree().root.add_child(minigame_node)
-	var minigame := minigame_node as RepairMinigame
+	var minigame: RepairMinigame = minigame_node as RepairMinigame
 	if minigame == null:
 		return
 	minigame.repair_complete.connect(_on_repair_done, CONNECT_ONE_SHOT)
@@ -76,7 +76,7 @@ func _on_repair_done() -> void:
 		await get_tree().create_timer(2.5).timeout
 		hud.show_log("Outer courtyard access unlocked.")
 
-	var dialogue_box := get_tree().get_first_node_in_group("dialogue_box")
+	var dialogue_box: DialogueBox = get_tree().get_first_node_in_group("dialogue_box")
 	if dialogue_box:
 		dialogue_box.start(DIALOGUE_DONE)
 

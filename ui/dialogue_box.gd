@@ -1,15 +1,15 @@
 class_name DialogueBox
 extends CanvasLayer
 
-signal dialogue_finished
+signal dialogue_finished()
 
 @onready var speaker_name  : Label        = $SpeakerName
 @onready var dialogue_text : RichTextLabel = $Panel/DialogueText
 @onready var continue_hint : Label = $Panel/ContinueHint
 
-const TYPEWRITER_SPEED := 0.03  # secondes par caractère
+const TYPEWRITER_SPEED: float = 0.03  # secondes par caractère
 
-var _lines    : Array  = []
+var _lines    : Array[Dictionary]  = []
 var _index    : int    = 0
 var _typing   : bool   = false
 var _finished : bool = false
@@ -20,7 +20,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
 
-func start(lines: Array) -> void:
+func start(lines: Array[Dictionary]) -> void:
 	_lines  = lines
 	_index  = 0
 	show()

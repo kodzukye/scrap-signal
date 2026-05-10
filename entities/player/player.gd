@@ -1,17 +1,17 @@
 extends CharacterBody2D
 
-const SPEED := 64
-const TILE_SIZE := 16
+const SPEED: float = 64.0
+const TILE_SIZE: float = 16.0
 
-@onready var sprite := $AnimatedSprite2D
-@onready var interaction_area := $InteractionArea
-@onready var push_ray := $PushRay
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var interaction_area: Area2D = $InteractionArea
+@onready var push_ray: RayCast2D = $PushRay
 
 @onready var hud : HUD = get_tree().get_first_node_in_group("hud")
 
-var last_direction := Vector2.DOWN
+var last_direction: Vector2 = Vector2.DOWN
 var interactable : Node = null
-var is_locked := false :
+var is_locked: bool = false:
 	set(value):
 		is_locked = value
 		if value:
@@ -31,17 +31,17 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 		return
 		
-	var direction := Input.get_vector(
+	var direction: Vector2 = Input.get_vector(
 		"move_left", "move_right", "move_up", "move_down"
 	)
 	
 	if push_ray and direction != Vector2.ZERO:
-		var dominant := _dominant_direction(direction)
+		var dominant: Vector2 = _dominant_direction(direction)
 		push_ray.target_position = dominant * (TILE_SIZE / 2.0 + 1)
 		push_ray.force_raycast_update()
 
 		if push_ray.is_colliding():
-			var collider = push_ray.get_collider()
+			var collider: Variant = push_ray.get_collider()
 			if collider.is_in_group("pushable"):
 				collider.try_push(dominant, TILE_SIZE)
 	
@@ -76,7 +76,6 @@ func _dir_name(dir: Vector2) -> String:
 
 # --- Interaction ---
 func _on_interaction_area_area_entered(area: Area2D) -> void:
-	print("Area détectée : ", area.name, " | has interact: ", area.has_method("interact"))
 	if area.has_method("interact"):
 		interactable = area
 		if hud:

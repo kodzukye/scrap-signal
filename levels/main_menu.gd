@@ -1,9 +1,9 @@
 extends Control
 
-@onready var press_label := $CenterContainer/VBoxContainer/PressLabel
-@onready var fade_rect   := $FadeRect
+@onready var press_label: Label = $CenterContainer/VBoxContainer/PressLabel
+@onready var fade_rect: ColorRect = $FadeRect
 
-var _can_start := false
+var _can_start: bool = false
 
 func _ready() -> void:
 	AudioManager.stop_ambiance() 
@@ -12,13 +12,13 @@ func _ready() -> void:
 	fade_rect.modulate = Color(1, 1, 1, 1)
 	fade_rect.modulate.a = 1.0
 	fade_rect.modulate.a = 1.0
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(fade_rect, "modulate:a", 0.0, 1.2)
 	tween.tween_callback(func(): _can_start = true)
 	_blink_prompt()
 
 func _blink_prompt() -> void:
-	var tween := create_tween().set_loops()
+	var tween: Tween = create_tween().set_loops()
 	tween.tween_property(press_label, "modulate:a", 0.0, 0.6)
 	tween.tween_interval(0.1)
 	tween.tween_property(press_label, "modulate:a", 1.0, 0.6)
@@ -34,7 +34,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _go_to_intro() -> void:
 	_can_start = false
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(fade_rect, "modulate:a", 1.0, 0.8)
 	tween.tween_callback(func():
 		get_tree().change_scene_to_file("res://levels/intro.tscn")

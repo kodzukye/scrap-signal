@@ -11,7 +11,7 @@ extends Area2D
 # Le layer qui cache le passage — à désactiver
 @export var layer_cache : TileMapLayer
 
-var _triggered := false
+var _triggered: bool = false
 
 func _ready() -> void:
 	# Au départ, sol et murs sont cachés

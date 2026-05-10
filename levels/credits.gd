@@ -1,6 +1,6 @@
 extends Control
 
-const SCROLL_SPEED := 20.0
+const SCROLL_SPEED: float = 20.0
 
 const CREDITS: Array[String] = [
 	"SCRAP SINGAL",
@@ -23,11 +23,11 @@ const CREDITS: Array[String] = [
 	"Thank you for playing.",
 ]
 
-@onready var scroll      := $ScrollContainer
-@onready var credits_lbl := $ScrollContainer/CreditsLabel
-@onready var fade_rect   := $FadeRect
+var _scrolling: bool = false
 
-var _scrolling := false
+@onready var scroll: ScrollContainer = $ScrollContainer
+@onready var credits_lbl: Label = $ScrollContainer/CreditsLabel
+@onready var fade_rect: ColorRect = $FadeRect
 
 func _ready() -> void:
 	credits_lbl.text = "\n".join(CREDITS)
@@ -38,7 +38,7 @@ func _ready() -> void:
 	credits_lbl.position.y = get_viewport_rect().size.y
 
 	fade_rect.modulate.a = 1.0
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(fade_rect, "modulate:a", 0.0, 1.2)
 	tween.tween_callback(func(): _scrolling = true)
 
@@ -62,7 +62,7 @@ func _end_credits() -> void:
 	if not _scrolling:
 		return
 	_scrolling = false
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(fade_rect, "modulate:a", 1.0, 1.0)
 	tween.tween_callback(func():
 		get_tree().change_scene_to_file("res://levels/main_menu.tscn")

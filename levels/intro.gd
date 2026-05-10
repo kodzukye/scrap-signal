@@ -1,21 +1,21 @@
 extends Node
 
-const LOGS := [
+const LOGS: Array[String] = [
 	"INITIALIZING SYSTEM...",
 	"LAST SAVE: 847 DAYS AGO.",
 	"MISSING DATA: 847 DAYS.",
 	"UNIT SCRAP-09... BACK ONLINE.",
 ]
 
-const CHAR_DELAY := 0.04 
-const LINE_PAUSE := 2 
-const CURSOR := "_"
+const CHAR_DELAY: float = 0.04
+const LINE_PAUSE: float = 2.0
+const CURSOR: String = "_"
 
-@onready var log_label    := $CanvasLayer/LogLabel
-@onready var background   := $CanvasLayer/Background
+var _full_text: String = ""
+var _cursor_visible: bool = true
 
-var _full_text := ""
-var _cursor_visible := true
+@onready var log_label: RichTextLabel = $CanvasLayer/LogLabel
+@onready var background: ColorRect = $CanvasLayer/Background
 
 func _ready() -> void:
 	log_label.text = ""
@@ -23,7 +23,7 @@ func _ready() -> void:
 	_play_sequence()
 
 func _start_cursor_blink() -> void:
-	var t := create_tween().set_loops()
+	var t: Tween = create_tween().set_loops()
 	t.tween_callback(_toggle_cursor).set_delay(0.5)
 
 func _toggle_cursor() -> void:
@@ -39,7 +39,7 @@ func _play_sequence() -> void:
 	await get_tree().create_timer(1).timeout
 
 	# Fade out
-	var tween := create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_property(background, "modulate:a", 0.0, 1.2)
 	await tween.finished
 	if OS.get_name() == "Web":
